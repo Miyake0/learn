@@ -177,30 +177,122 @@ ladder.up().up().up().up().up().up().up().down().showStep().down().showStep();
 
 // let secobj = firstobj;
 
-const first = [1, 2, 3, 4];
-const second = [4, 5, 3, 6];
-const duplicate = [];
+// const first = [1, 2, 3, 4];
+// const second = [4, 5, 3, 6];
+// const duplicate = [];
 
-const array = first.concat(second);
+// const array = first.concat(second);
 
-function intersertion(array) {
-  for (let i = 0; i < array.length - 1; i++) {
-    for (let j = i + 1; j < array.length; j++) {
-      if (first[i] == second[j]) {
-        duplicate.push(array[i]);
-        j++;
+// function intersertion(array) {
+//   for (let i = 0; i < array.length - 1; i++) {
+//     for (let j = i + 1; j < array.length; j++) {
+//       if (first[i] == second[j]) {
+//         duplicate.push(array[i]);
+//         j++;
+//       } else {
+//         i++;
+//         j++;
+//       }
+//     }
+//   }
+// }
+
+// intersertion(duplicate);
+
+// for (let i = 0; i < 10; i++) {
+//   setTimeout(function () {
+//     console.log(i);
+//   }, 0);
+// }
+
+// let obj = {
+//   name: 2,
+// };
+
+// let obj1 = {
+//   name: 3,
+// };
+
+// alert(obj - obj1);
+
+let arr1 = [4, 2, 3, 6, 5, 4, 7, 6, 5, 8];
+let arr2 = [2, 9, 3, 6, 4, 2, 7, 2, 1, 8];
+
+function findIntersertion() {
+  const intersection = [];
+
+  for (let i = 0; i < 10; i++) {
+    if (arr2[i] == arr1[i]) {
+      intersection.push(1);
+    } else {
+      intersection.push(0);
+    }
+  }
+  return intersection;
+}
+
+let result = findIntersertion(arr1, arr2);
+
+// let a = 0;
+// let b = 0;
+// a = +prompt("A", this.a);
+// b = +prompt("B", b);
+
+// console.log(a + b);
+
+// let num = 0;
+
+// function readNumber() {
+//   let num;
+
+//   do {
+//     num = prompt("Введите число", 0);
+//   } while (!isFinite(num));
+
+//   if (num === null || num === "") return null;
+
+//   return +num;
+// }
+
+// alert(`Число: ${readNumber()}`);
+
+// readNumber(num);
+
+// let i = 0;
+// while (i < 11) {
+//   i += 0.2;
+//   if (i > 9.8 && i < 10.2) alert(i);
+// }
+
+// let min = 1;
+// let max = 5;
+// let digit = 0;
+
+// function randomDigit(min, max) {
+//   do (digit < min || digit > max) {
+//     Math.random() * 10;
+//   }
+// }
+
+// function random(min, max) {
+//   return Math.floor(1 + Math.random() * 4);
+// }
+
+function XO(str) {
+  str = str.toLowerCase().split("");
+
+  let Count = 0;
+
+  for (let i = 0; i < str.length - 1; i++) {
+    for (let j = i + 1; j < str.length; i++) {
+      if (str[i] == str[j]) {
+        Count++;
+        i++;
       } else {
         i++;
         j++;
       }
     }
   }
-}
-
-intersertion(duplicate);
-
-for (let i = 0; i < 10; i++) {
-  setTimeout(function () {
-    console.log(i);
-  }, 0);
+  return Count % 2 == 0 ? true : false;
 }
