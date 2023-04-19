@@ -215,23 +215,23 @@ ladder.up().up().up().up().up().up().up().down().showStep().down().showStep();
 
 // alert(obj - obj1);
 
-let arr1 = [4, 2, 3, 6, 5, 4, 7, 6, 5, 8];
-let arr2 = [2, 9, 3, 6, 4, 2, 7, 2, 1, 8];
+// let arr1 = [4, 2, 3, 6, 5, 4, 7, 6, 5, 8];
+// let arr2 = [2, 9, 3, 6, 4, 2, 7, 2, 1, 8];
 
-function findIntersertion() {
-  const intersection = [];
+// function findIntersertion() {
+//   const intersection = [];
 
-  for (let i = 0; i < 10; i++) {
-    if (arr2[i] == arr1[i]) {
-      intersection.push(1);
-    } else {
-      intersection.push(0);
-    }
-  }
-  return intersection;
-}
+//   for (let i = 0; i < 10; i++) {
+//     if (arr2[i] == arr1[i]) {
+//       intersection.push(1);
+//     } else {
+//       intersection.push(0);
+//     }
+//   }
+//   return intersection;
+// }
 
-let result = findIntersertion(arr1, arr2);
+// let result = findIntersertion(arr1, arr2);
 
 // let a = 0;
 // let b = 0;
@@ -278,21 +278,49 @@ let result = findIntersertion(arr1, arr2);
 //   return Math.floor(1 + Math.random() * 4);
 // }
 
-function XO(str) {
-  str = str.toLowerCase().split("");
+// function XO(str) {
+//   str = str.toLowerCase().split("");
 
-  let Count = 0;
+//   let Count = 0;
 
-  for (let i = 0; i < str.length - 1; i++) {
-    for (let j = i + 1; j < str.length; i++) {
-      if (str[i] == str[j]) {
-        Count++;
-        i++;
-      } else {
-        i++;
-        j++;
-      }
-    }
-  }
-  return Count % 2 == 0 ? true : false;
-}
+//   for (let i = 0; i < str.length - 1; i++) {
+//     for (let j = i + 1; j < str.length; i++) {
+//       if (str[i] == str[j]) {
+//         Count++;
+//         i++;
+//       } else {
+//         i++;
+//         j++;
+//       }
+//     }
+//   }
+//   return Count % 2 == 0 ? true : false;
+// }
+
+// function checkSpam(message) {
+//   message = message.toLowerCase();
+//   if (message.includes("Viagra") || message.includes("XXX")) {
+//     return false;
+//   }
+//   return true;
+// }
+
+// function truncate(str, maxlength) {
+//   if (str.length > maxlength) {
+//     return str.slice(0, maxlength - 1) + "...";
+//   }
+// }
+
+// console.log(truncate("Вот, что мне хотелось бы сказать на эту тему:", 20));
+
+// str = "Вот, что мне хотелоc...";
+
+// function extractCurrencyValue(str) {
+//   return +str.slice(1);
+// }
+
+// console.log(extractCurrencyValue("$120") === 120);
+
+// str = parseInt("$120");
+
+// console.log(extractCurrencyValue("$120"));
