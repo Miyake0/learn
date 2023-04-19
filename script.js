@@ -324,3 +324,66 @@ ladder.up().up().up().up().up().up().up().down().showStep().down().showStep();
 // str = parseInt("$120");
 
 // console.log(extractCurrencyValue("$120"));
+
+// let styles = ["Jazz", "Bluz"];
+
+// styles.push("Rock");
+
+// styles.shift();
+
+// console.log(styles.length);
+
+// styles[Math.floor((styles.length - 1) / 2)] = "Classic";
+
+// styles.unshift("Rap");
+
+// console.log(styles);
+
+// let arr = ["a", "b"];
+
+// arr.push(function () {
+//   alert(this);
+// });
+
+// arr[2](); // a,b,function(){...}
+
+// function sumInput() {
+//   let numbers = [];
+//   while (true) {
+//     let a;
+//     a = prompt("A", a);
+
+//     if (a === "" || a === null || !isFinite(a)) break;
+
+//     numbers.push(+a);
+//     console.log(numbers);
+//   }
+
+//   let sum = 0;
+
+//   for (let number of numbers) {
+//     sum += number;
+//   }
+//   console.log(sum);
+// }
+
+// sumInput();
+
+function getMaxSubSum(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = i; j < arr.length; j++) {
+      if (arr[i] < arr[j]) {
+        console.log("ys");
+      } else {
+        console.log("no");
+      }
+    }
+  }
+}
+
+getMaxSubSum([-1, 2, 3, -9]) == 5;
+getMaxSubSum([2, -1, 2, 3, -9]) == 6;
+getMaxSubSum([-1, 2, 3, -9, 11]) == 11;
+getMaxSubSum([-2, -1, 1, 2]) == 3;
+getMaxSubSum([100, -9, 2, -3, 5]) == 100;
+getMaxSubSum([1, 2, 3]) == 6;
