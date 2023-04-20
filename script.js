@@ -369,21 +369,112 @@ ladder.up().up().up().up().up().up().up().down().showStep().down().showStep();
 
 // sumInput();
 
-function getMaxSubSum(arr) {
-  for (let i = 0; i < arr.length; i++) {
-    for (let j = i; j < arr.length; j++) {
-      if (arr[i] < arr[j]) {
-        console.log("ys");
-      } else {
-        console.log("no");
-      }
-    }
+// function getMaxSubSum(arr) {
+//   for (let i = 0; i < arr.length; i++) {
+//     for (let j = i; j < arr.length; j++) {
+//       if (arr[i] < arr[j]) {
+//         console.log("ys");
+//       } else {
+//         console.log("no");
+//       }
+//     }
+//   }
+// }
+
+// getMaxSubSum([-1, 2, 3, -9]) == 5;
+// getMaxSubSum([2, -1, 2, 3, -9]) == 6;
+// getMaxSubSum([-1, 2, 3, -9, 11]) == 11;
+// getMaxSubSum([-2, -1, 1, 2]) == 3;
+// getMaxSubSum([100, -9, 2, -3, 5]) == 100;
+// getMaxSubSum([1, 2, 3]) == 6;
+
+// function camelize(word) {
+//   word = word
+//     .split("-")
+//     .map((str, index) =>
+//       index == 0 ? str : str[0].toUpperCase() + str.slice(1)
+//     )
+//     .join("");
+
+//   console.log(word);
+// }
+
+// camelize("background-color") == "backgroundColor";
+
+// let arr = [5, 3, 8, 1];
+// let result = [];
+
+// function filterRange(arr, a, b) {
+//   for (item of arr) {
+//     if (item <= b && item >= a) {
+//       result.push(item);
+//     }
+//   }
+// }
+
+// let filtered = filterRange(arr, 1, 4);
+
+// console.log(filtered);
+
+// let arr = [5, 2, 1, -10, 8];
+
+// arr.sort((a, b) => b - a);
+
+// alert(arr); // 8, 5, 2, 1, -10
+
+// let arr = ["HTML", "JavaScript", "CSS"];
+
+// function copySorted() {
+//   return arr.slice().sort();
+// }
+
+// let sorted = copySorted(arr);
+
+// alert(sorted); // CSS, HTML, JavaScript
+// alert(arr); // HTML, JavaScript, CSS (без изменений)
+
+// let calc = new Calculator();
+
+// function Calculator(str) {
+//   this.calculate = function (str) {
+//     console.log(str.split(" "));
+//   };
+// }
+
+// alert(calc.calculate("3 + 7")); // 10
+
+// function unique(arr) {
+//   return Array.from(new Set(arr));
+// }
+
+// let set = new Set();
+
+// let values = [
+//   "Hare",
+//   "Krishna",
+//   "Hare",
+//   "Krishna",
+//   "Krishna",
+//   "Krishna",
+//   "Hare",
+//   "Hare",
+//   ":-O",
+// ];
+
+// alert(unique(values)); // Hare,Krishna,:-O
+
+function aclean(arr) {
+  let map = new Map();
+
+  for (let word of arr) {
+    // разбиваем слово на буквы, сортируем и объединяем снова в строку
+    let sorted = word.toLowerCase().split("").sort(); // (*)
+    map.set(sorted, word);
   }
+
+  return Array.from(map.values());
 }
 
-getMaxSubSum([-1, 2, 3, -9]) == 5;
-getMaxSubSum([2, -1, 2, 3, -9]) == 6;
-getMaxSubSum([-1, 2, 3, -9, 11]) == 11;
-getMaxSubSum([-2, -1, 1, 2]) == 3;
-getMaxSubSum([100, -9, 2, -3, 5]) == 100;
-getMaxSubSum([1, 2, 3]) == 6;
+let arr = ["nap", "teachers", "cheaters", "PAN", "ear", "era", "hectares"];
+
+alert(aclean(arr));
