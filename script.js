@@ -463,18 +463,50 @@ ladder.up().up().up().up().up().up().up().down().showStep().down().showStep();
 
 // alert(unique(values)); // Hare,Krishna,:-O
 
-function aclean(arr) {
-  let map = new Map();
+// function aclean(arr) {
+//   let map = new Map();
 
-  for (let word of arr) {
-    // разбиваем слово на буквы, сортируем и объединяем снова в строку
-    let sorted = word.toLowerCase().split("").sort(); // (*)
-    map.set(sorted, word);
+//   for (let word of arr) {
+//     // разбиваем слово на буквы, сортируем и объединяем снова в строку
+//     let sorted = word.toLowerCase().split("").sort(); // (*)
+//     map.set(sorted, word);
+//   }
+
+//   return Array.from(map.values());
+// }
+
+// let arr = ["nap", "teachers", "cheaters", "PAN", "ear", "era", "hectares"];
+
+// alert(aclean(arr));
+
+// Tic Tac Toe Checker
+
+// let arr = [];
+
+// function isSolved(board) {
+//   for (let i = 0; i < board.length; i++) {
+//     board[i].every((xElement) => {
+//       return xElement.arr[i] === 2 || xElement.arr[i] === 1;
+//     });
+//     for (let j = 0; j < board[i].length; j++) {
+//       board[i][j].every((yElement) => {
+//         return yElement.arr[i][j] === 2 || yElement.arr[i][j] === 1;
+//       });
+//     }
+//   }
+//   return board;
+// }
+
+// board = [
+//   [0, 0, 1],
+//   [0, 1, 2],
+//   [2, 1, 0],
+// ];
+
+function addBinary(a, b) {
+  let binaryArr = [];
+  let sum = a + b;
+  if (sum !== 0 || sum !== 1) {
+    return binaryArr.push(sum % 2);
   }
-
-  return Array.from(map.values());
 }
-
-let arr = ["nap", "teachers", "cheaters", "PAN", "ear", "era", "hectares"];
-
-alert(aclean(arr));
