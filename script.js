@@ -503,10 +503,116 @@ ladder.up().up().up().up().up().up().up().down().showStep().down().showStep();
 //   [2, 1, 0],
 // ];
 
-function addBinary(a, b) {
-  let binaryArr = [];
-  let sum = a + b;
-  if (sum !== 0 || sum !== 1) {
-    return binaryArr.push(sum % 2);
-  }
+// function addBinary(a, b) {
+//   let binaryArr = [];
+//   let sum = a + b;
+//   if (sum !== 0 || sum !== 1) {
+//     return binaryArr.push(sum % 2);
+//   }
+// }
+
+// let prices = {
+//   banana: 1,
+//   orange: 2,
+//   meat: 4,
+// };
+
+// let doublePrices = Object.fromEntries(
+//   // преобразовать в массив, затем map, затем fromEntries обратно объект
+//   Object.entries(prices).map(([key, value]) => [key, value * 2])
+// );
+
+// alert(doublePrices.meat); // 8
+
+// let salaries = {
+//   John: 100,
+//   Pete: 300,
+//   Mary: 250,
+// };
+
+// let sum = 0;
+
+// function sumSalary() {
+//   for (let salary of Object.values(salaries)) {
+//     sum += salary;
+//   }
+//   return sum;
+// }
+
+// alert(sumSalary(salaries)); // 650
+
+// function count() {
+//   return Object.keys(user).length;
+// }
+
+// let user = {
+//   name: "John",
+//   age: 30,
+// };
+
+// alert(count(user)); // 2
+
+// let arr = [3, 2, 1, 5, 6, 4, 7, 9]
+
+// boolean = arr
+
+// let user = {
+//   name: "John",
+//   years: 30,
+// };
+
+// let { name, years: age, isAdmin = false } = user;
+
+// alert(name); // John
+// alert(age); // 30
+// alert(isAdmin); // false
+
+// function topSalary() {
+
+// }
+
+// let salaries = {
+//   John: 100,
+//   Pete: 300,
+//   Mary: 250,
+// };
+
+// let user = {
+//   name: "Василий Иванович",
+//   age: 35,
+// };
+
+// let users = JSON.stringify(user);
+// let obj = JSON.parse(users);
+
+// console.log(users);
+// console.log(obj);
+// let user2 = JSON.parse(JSON.stringify(user));
+
+let room = {
+  number: 23,
+};
+
+let meetup = {
+  title: "Совещание",
+  occupiedBy: [{ name: "Иванов" }, { name: "Петров" }],
+  place: room,
+};
+
+// цикличные ссылки
+room.occupiedBy = meetup;
+meetup.self = meetup;
+
+alert(
+  JSON.stringify(meetup, function replacer(key, value) {
+    return ["title"];
+  })
+);
+
+/* в результате должно быть:
+{
+  "title":"Совещание",
+  "occupiedBy":[{"name":"Иванов"},{"name":"Петров"}],
+  "place":{"number":23}
 }
+*/
