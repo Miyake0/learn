@@ -843,3 +843,59 @@ ladder.up().up().up().up().up().up().up().down().showStep().down().showStep();
 // sum(1)(2) == 3; // 1 + 2
 
 // console.log(sum(1)(2)(3));
+
+// let i = 1;
+// setTimeout(function run() {
+//   func(i);
+//   setTimeout(run, 100);
+// }, 100);
+
+// console.log(Math.floor(8 / 3) + 1);
+
+// function queueTime(customers, n) {
+//   let time = 0;
+
+//   if (customers.length < n) {
+//     for (let i = 0; i <= customers.length; i++) {
+//       return (time += i);
+//     }
+//     // } else if (customers.length == n){
+//     //   var arr = new Array(n).fill(0);
+//   }
+// }
+
+// var arr = new Array(n).fill(0);
+
+// let customers = [5, 3, 4];
+// let n = 7;
+
+// function printNumbers(from, to) {
+//   let curent = from;
+
+//   let timerId = setInterval(function () {
+//     alert(curent);
+
+//     if (curent == to) {
+//       clearInterval(timerId);
+//     }
+
+//     curent++;
+//   }, 1000);
+// }
+
+// printNumbers(5, 10);
+
+function queueTime(customers, n) {
+  var arr = new Array(n).fill(0);
+  for (var i = 0; i < customers.length; i++) {
+    var idx = arr.indexOf(Math.min(arr));
+    arr[idx] += customers[i];
+  }
+
+  return Math.max(arr);
+}
+
+let arr1 = new Array(7).fill(0);
+
+console.log(arr1);
+console.log(queueTime([3, 3, 1, 5, 7, 3], 3));
