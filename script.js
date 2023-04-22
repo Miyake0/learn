@@ -885,17 +885,38 @@ ladder.up().up().up().up().up().up().up().down().showStep().down().showStep();
 
 // printNumbers(5, 10);
 
-function queueTime(customers, n) {
-  var arr = new Array(n).fill(0);
-  for (var i = 0; i < customers.length; i++) {
-    var idx = arr.indexOf(Math.min(arr));
-    arr[idx] += customers[i];
-  }
+// function queueTime(customers, n) {
+//   var arr = new Array(n).fill(0);
+//   for (var i = 0; i < customers.length; i++) {
+//     var idx = arr.indexOf(Math.min(arr));
+//     arr[idx] += customers[i];
+//   }
 
-  return Math.max(arr);
-}
+//   return Math.max(arr);
+// }
 
-let arr1 = new Array(7).fill(0);
+// let arr1 = new Array(7).fill(0);
 
-console.log(arr1);
-console.log(queueTime([3, 3, 1, 5, 7, 3], 3));
+// console.log(arr1);
+// console.log(queueTime([3, 3, 1, 5, 7, 3], 3));
+
+// function firstNonConsecutive(arr) {
+//   let countArr = [arr[0]];
+//   for (let i = 0; i <= arr.length; i++) {
+//     if (arr[i] == countArr) {
+//       countArr.push(arr[i]);
+//     } else if (arr[i] !== countArr) {
+//       return null;
+//     }
+//   }
+//   return arr
+// }
+
+// arr = [3, 4, 5, 6];
+// let countArr = [arr[0]];
+// console.log(countArr);
+// console.log(firstNonConsecutive(arr));
+
+arr = [3];
+
+console.log(arr);
