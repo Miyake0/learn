@@ -589,25 +589,25 @@ ladder.up().up().up().up().up().up().up().down().showStep().down().showStep();
 // console.log(obj);
 // let user2 = JSON.parse(JSON.stringify(user));
 
-let room = {
-  number: 23,
-};
+// let room = {
+//   number: 23,
+// };
 
-let meetup = {
-  title: "Совещание",
-  occupiedBy: [{ name: "Иванов" }, { name: "Петров" }],
-  place: room,
-};
+// let meetup = {
+//   title: "Совещание",
+//   occupiedBy: [{ name: "Иванов" }, { name: "Петров" }],
+//   place: room,
+// };
 
-// цикличные ссылки
-room.occupiedBy = meetup;
-meetup.self = meetup;
+// // цикличные ссылки
+// room.occupiedBy = meetup;
+// meetup.self = meetup;
 
-alert(
-  JSON.stringify(meetup, function replacer(key, value) {
-    return ["title"];
-  })
-);
+// alert(
+//   JSON.stringify(meetup, function replacer(key, value) {
+//     return ["title"];
+//   })
+// );
 
 /* в результате должно быть:
 {
@@ -616,3 +616,159 @@ alert(
   "place":{"number":23}
 }
 */
+// function factorial(n) {
+//   let result = 0;
+//   let arr = [];
+
+//   for (let i = 0; i < n; i++) {
+//     arr = arr.push[i];
+//     return arr;
+//   }
+
+//   return arr;
+// }
+
+// arr.push[1];
+
+// function factorial(n) {
+//   return n != 1 ? n * factorial(n - 1) : 1;
+// }
+
+// function sumTo(n) {
+//   return n != 1 ? n + sumTo(n - 1) : 1;
+// }
+
+// function sum(n) {
+//   let sum = 0;
+//   for (let i = 0; i <= n; i++) {
+//     sum += i;
+//   }
+//   return sum;
+// }
+
+// function sumToo(n) {
+//   return (n + 1) / 2;
+// }
+
+// alert(sumToo(100));
+// alert(sumTo(100));
+// alert(sum(100)); // 5050
+
+// function fib(n) {
+//   return n != 1 ? n + fib(n - 1) : 1;
+// }
+
+// alert(fib(3)); // 2
+// alert(fib(7)); // 13
+// alert(fib(77)); // 5527939700884757
+
+// let list = {
+//   value: 1,
+//   next: {
+//     value: 2,
+//     next: {
+//       value: 3,
+//       next: {
+//         value: 4,
+//         next: null,
+//       },
+//     },
+//   },
+// };
+
+// printList(list) {
+//   console.log(list != null ? printlist(list.next))
+// }
+
+// let list = {
+//   value: 1,
+//   next: {
+//     value: 2,
+//     next: {
+//       value: 3,
+//       next: {
+//         value: 4,
+//         next: null,
+//       },
+//     },
+//   },
+// };
+
+// function printReverseList(list) {
+//   if (list.next) {
+//     printReverseList(list.next);
+//   }
+
+//   alert(list.value);
+// }
+
+// printReverseList(list);
+
+// let name = "John";
+// name = "Pete"; // (*)
+
+// function sayHi(name) {
+//   console.log("Hi, " + name);
+// }
+
+// sayHi(name); // Pete
+
+// function f() {
+//   let value = Math.random();
+
+//   function g() {
+//     debugger; // в консоли: напишите alert(value); Такой переменной нет!
+//   }
+
+//   return g;
+// }
+
+// g();
+
+// function makeCounter() {
+//   let count = 0;
+
+//   return function () {
+//     return count++;
+//   };
+// }
+
+// let counter = makeCounter();
+// let counter2 = makeCounter();
+
+// alert(counter()); // 0
+// alert(counter()); // 1
+
+// alert(counter2()); // ?
+// alert(counter2()); // ?
+
+// function Counter() {
+//   let count = 0;
+
+//   this.up = function () {
+//     return ++count;
+//   };
+
+//   this.down = function () {
+//     return --count;
+//   };
+// }
+
+// let counter = new Counter();
+// let counter2 = new Counter();
+
+// alert(counter.up()); // 1
+// alert(counter.up()); // 2
+
+// alert(counter2.up()); // 1
+// alert(counter2.up()); // 2
+
+(function sum() {
+  let a;
+  let b;
+  return a + b
+})
+
+
+sum(1)(2) = 3
+sum(5)(-1) = 4
