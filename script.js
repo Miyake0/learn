@@ -763,12 +763,83 @@ ladder.up().up().up().up().up().up().up().down().showStep().down().showStep();
 // alert(counter2.up()); // 1
 // alert(counter2.up()); // 2
 
-(function sum() {
-  let a;
-  let b;
-  return a + b
-})
+// (function sum() {
+//   let a;
+//   let b;
+//   return a + b
+// })
 
+// sum(1)(2) = 3
+// sum(5)(-1) = 4
 
-sum(1)(2) = 3
-sum(5)(-1) = 4
+// function inBetween(a, b) {
+//   return function () {
+//     return arr.filter(() => arr.length > a && arr.length < b);
+//   };
+// }
+
+// let arr = [1, 2, 3, 4, 5, 6, 7];
+
+// alert(arr.filter(inBetween(3, 6))); // 3,4,5,6
+
+// alert(arr.filter(inArray([1, 2, 10]))); // 1,2
+
+// function byField(name) {
+//   return func
+// }
+
+// users.sort(byField('name'));
+
+// function makeArmy() {
+//   let shooters = [];
+
+//   while (let i < 10) {
+//     let shooter = function () {
+//       // функция shooter
+//       alert(i); // должна выводить порядковый номер
+//       shooters.push(shooter);
+//     i++;
+//     };
+
+//   }
+
+//   return shooters;
+// }
+
+// let army = makeArmy();
+
+// army[0](); // у 0-го стрелка будет номер 10
+// army[5](); // и у 5-го стрелка тоже будет номер 10
+// // ... у всех стрелков будет номер 10, вместо 0, 1, 2, 3...
+
+// function makeCounter() {
+//   let count = 0;
+
+//   function counter() {
+//     return count++;
+//   }
+
+//   counter.set = (value) => (count = value);
+
+//   function counterDecrease() {
+//     return count--;
+//   }
+
+//   return counter;
+// }
+
+// let counterMinus = makeCounter();
+// let counter = makeCounter();
+
+// counter.count = 10;
+// alert(counter()); // 10
+
+// function sum(a) {
+//   return function (...b) {
+//     return a.join(...b);
+//   };
+// }
+
+// sum(1)(2) == 3; // 1 + 2
+
+// console.log(sum(1)(2)(3));
