@@ -917,6 +917,98 @@ ladder.up().up().up().up().up().up().up().down().showStep().down().showStep();
 // console.log(countArr);
 // console.log(firstNonConsecutive(arr));
 
-arr = [3];
+// function firstNonConsecutive(arr) {
+//   for (let i = 0; i <= arr.length; i++) {
+//     if (arr[i] == countArr[0]) {
+//       countArr++;
+//     } else {
+//       return countArr;
+//     }
+//   }
+// }
 
-console.log(arr);
+// arr = [3, 7, 5, 6, 7];
+// let countArr = arr[[1]];
+
+// console.log(firstNonConsecutive(arr));
+// console.log(countArr);
+
+// function compareSets(set1, set2) {
+//   // преобразуем множества в массивы
+//   let arr1 = Array.from(set1);
+//   let arr2 = Array.from(set2);
+
+//   // сортируем массивы
+//   arr1.sort();
+//   arr2.sort();
+
+//   let counter = 0;
+
+//   // сравниваем элементы массивов
+//   for (let i = 0; i < arr1.length; i++) {
+//     if (arr1[i] === arr2[i]) {
+//       counter++;
+//     }
+//   }
+
+//   // если количество совпадающих элементов равно длине массива, то множества равны
+//   if (counter === arr1.length) {
+//     return 1; // вернуть 1 в двоичной форме
+//   } else {
+//     return 0; // вернуть 0 в двоичной форме
+//   }
+// }
+
+// // пример использования функции
+// let set1 = new Set([1, 2, 3]);
+// let set2 = new Set([3, 2, 1]);
+// console.log(compareSets(set1, set2)); // выведет 1
+
+// function persistence(num) {
+//   if (num < 10) {
+//     return num;
+//   } else {
+//     return persistence(
+//       String(num / 10)
+//         .split(".")
+//         .reduce(function (mult, current) {
+//           return mult * current;
+//         })
+//     );
+//   }
+// }
+
+// let count = -1;
+
+// function persistence(num) {
+//   count++;
+//   let newNum = 0;
+//   if (num < 10) {
+//     return num;
+//   }
+
+//   newNum = String(num)
+//     .split("")
+//     .map(Number)
+//     .reduce((value, current) => value * current);
+
+//   console.log(newNum);
+
+//   persistence(newNum);
+// }
+
+// persistence(39);
+
+// console.log("tat" + " " + count);
+
+function countPositivesSumNegatives(input) {
+  let sumPositive = 0;
+  let sumNegative = 0;
+  for (let i = 0; i < input.length; i++) {
+    if (input[i] >= 0) {
+      sumPositive += input[i];
+    }
+    sumNegative -= input[i];
+  }
+  return sumPositive;
+}
