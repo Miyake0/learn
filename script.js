@@ -1001,14 +1001,24 @@ ladder.up().up().up().up().up().up().up().down().showStep().down().showStep();
 
 // console.log("tat" + " " + count);
 
-function countPositivesSumNegatives(input) {
-  let sumPositive = 0;
-  let sumNegative = 0;
-  for (let i = 0; i < input.length; i++) {
-    if (input[i] >= 0) {
-      sumPositive += input[i];
-    }
-    sumNegative -= input[i];
-  }
-  return sumPositive;
-}
+// function countPositivesSumNegatives(input) {
+//   let arr = [];
+//   let countPositive = 0;
+//   let sumNegative = 0;
+//   for (let i = 0; i < input.length; i++) {
+//     if (input[i] >= 0) {
+//       countPositive++;
+//     } else if (input[i] < 0) {
+//       sumNegative -= input[i];
+//     }
+//   }
+
+//   arr.push(countPositive, -sumNegative);
+//   return arr;
+// }
+
+// console.log(
+//   countPositivesSumNegatives([
+//     0, 2, 3, 0, 5, 6, 7, 8, 9, 10, -11, -12, -13, -14,
+//   ])
+// );
