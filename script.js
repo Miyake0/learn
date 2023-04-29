@@ -1070,40 +1070,148 @@ ladder.up().up().up().up().up().up().up().down().showStep().down().showStep();
 // let clock = new Clock({ template: "h:m:s" });
 // clock.start();
 
-class Clock {
-  constructor({ template }) {
-    this.template = template;
-  }
+// class Clock {
+//   constructor({ template }) {
+//     this.template = template;
+//   }
 
-  render() {
-    let date = new Date();
+//   render() {
+//     let date = new Date();
 
-    let hours = date.getHours();
-    if (hours < 10) hours = "0" + hours;
+//     let hours = date.getHours();
+//     if (hours < 10) hours = "0" + hours;
 
-    let mins = date.getMinutes();
-    if (mins < 10) mins = "0" + mins;
+//     let mins = date.getMinutes();
+//     if (mins < 10) mins = "0" + mins;
 
-    let secs = date.getSeconds();
-    if (secs < 10) secs = "0" + secs;
+//     let secs = date.getSeconds();
+//     if (secs < 10) secs = "0" + secs;
 
-    let output = this.template
-      .replace("h", hours)
-      .replace("m", mins)
-      .replace("s", secs);
+//     let output = this.template
+//       .replace("h", hours)
+//       .replace("m", mins)
+//       .replace("s", secs);
 
-    console.log(output);
-  }
+//     console.log(output);
+//   }
 
-  stop() {
-    clearInterval(this.timer);
-  }
+//   stop() {
+//     clearInterval(this.timer);
+//   }
 
-  start() {
-    this.render();
-    this.timer = setInterval(() => this.render(), 1000);
-  }
-}
+//   start() {
+//     this.render();
+//     this.timer = setInterval(() => this.render(), 1000);
+//   }
+// }
 
-let clock = new Clock({ template: "h:m:s" });
-clock.start();
+// let clock = new Clock({ template: "h:m:s" });
+// clock.start();
+
+// var lengthOfLastWord = function (s) {
+//   return s
+//     .split(" ")
+//     .filter((word) => word.length > 0)
+//     .pop().length;
+//   // return arr[arr.length - 1].length;
+// };
+
+// console.log(lengthOfLastWord("   fly me   to   the moon  "));
+
+// class LinkedList {
+//   constructor() {
+//     this.size = 0
+//     this.root = null
+//   }
+// }
+
+// add(value) {
+
+// }
+
+// class Node {
+//   constructor(value) {
+//     this.value = value
+//     this.next = null
+//   }
+// }
+
+// class Clock {
+//   constructor({ template }) {
+//     this.template = template;
+//   }
+
+//   render() {
+//     let date = new Date();
+
+//     let hours = date.getHours();
+//     if (hours < 10) hours = "0" + hours;
+
+//     let mins = date.getMinutes();
+//     if (mins < 10) mins = "0" + mins;
+
+//     let secs = date.getSeconds();
+//     if (secs < 10) secs = "0" + secs;
+
+//     let output = this.template
+//       .replace("h", hours)
+//       .replace("m", mins)
+//       .replace("s", secs);
+
+//     console.log(output);
+//   }
+
+//   stop() {
+//     clearInterval(this.timer);
+//   }
+
+//   start() {
+//     this.render();
+//     this.timer = setInterval(() => this.render(), 1000);
+//   }
+// }
+
+// class ExtendClock extends Clock {
+//   constructor({ template }) {
+//     super({ template });
+//     this.precision = 1000;
+//   }
+
+//   start() {
+//     this.render();
+//     this.timer = setInterval(() => this.render(), this.precision);
+//   }
+// }
+
+// arr1 = [3, 3, 4, , 2, 1];
+// arr2 = [4, 4, 6, 3, 7, 9];
+
+// let arr = arr1.concat(arr2);
+
+// console.log(arr.sort((a, b) => a - b));
+
+// class LinkedList {
+//   constructor() {
+//     this.head = null;
+//     this.tail = null;
+//   }
+
+//   append(data) {
+//     const node = { data, next: null };
+
+//     if (this.tail) {
+//       this.tail.next = node;
+//     }
+
+//     if (!this.tail) {
+//       this.tail = node;
+//     }
+
+//     this.tail = node;
+//   }
+// }
+
+// const list = new LinkedList();
+// list.append(3);
+
+// list
