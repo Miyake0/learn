@@ -1215,3 +1215,22 @@ ladder.up().up().up().up().up().up().up().down().showStep().down().showStep();
 // list.append(3);
 
 // list
+
+let nums = [0, 0, 1, 1, 1, 2, 2, 3, 3, 4];
+result = [];
+
+function twoPoint() {
+  for (let i = 0; i < nums.length - 1; i++) {
+    for (let j = 1; j < nums.length; j++) {
+      if (nums[i] !== nums[j]) {
+        result.push(nums[i]);
+        i++;
+      }
+    }
+  }
+  return result;
+}
+
+console.log(twoPoint(nums));
+
+// console.log(Array.from(new Set(nums)));
