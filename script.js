@@ -1216,21 +1216,127 @@ ladder.up().up().up().up().up().up().up().down().showStep().down().showStep();
 
 // list
 
-let nums = [0, 0, 1, 1, 1, 2, 2, 3, 3, 4];
-result = [];
+// let nums = [0, 0, 1, 1, 1, 2, 2, 3, 3, 4];
+// result = [];
 
-function twoPoint() {
-  for (let i = 0; i < nums.length - 1; i++) {
-    for (let j = 1; j < nums.length; j++) {
-      if (nums[i] !== nums[j]) {
-        result.push(nums[i]);
-        i++;
-      }
-    }
-  }
-  return result;
-}
+// function twoPoint() {
+//   for (let i = 0; i < nums.length - 1; i++) {
+//     for (let j = 1; j < nums.length; j++) {
+//       if (nums[i] !== nums[j]) {
+//         result.push(nums[i]);
+//         i++;
+//       }
+//     }
+//   }
+//   return result;
+// }
 
-console.log(twoPoint(nums));
+// console.log(twoPoint(nums));
 
 // console.log(Array.from(new Set(nums)));
+
+// digits[digits.length - 1] = digits[digits.length - 1] + 1;
+
+// var plusOne = function (arr) {
+//   // for (let i = 0; i < digits.length; i++) {
+//   //   digits.length;
+//   //   if (digits[i] === 10) {
+//   //     digits[i] = 0;
+//   //     let j = i - 1;
+//   //     while (digits[j] === 10) {
+//   //       j--;
+//   //     }
+//   //     if (j >= 0) {
+//   //       digits[j] += 1;
+//   //     }
+//   //     digits[i] = 0;
+//   //   }
+//   // }
+//   // return digits;
+
+//   arr.forEach((element, index) => {
+//     if (element === 10 && index > 0) {
+
+//       for (let i = index - 1; i >= 0 && arr[i] === 10; i--) {
+//         arr[i] = 0;
+//         if (i > 0) arr[i - 1] += 1;
+//       }
+
+//       arr[index] = 0;
+//     }
+//   });
+// };
+
+// digits;
+
+// const arr = [1, 2, 3, 4, 5, 10, 6, 7, 10, 9, 10];
+
+// arr.forEach((element, index) => {
+//   if (element === 10 && index > 0) {
+//     console.log(
+//       `Найдено число 10 в массиве на позиции ${index}, увеличиваем предыдущие элементы на 1 и заменяем текущий элемент на 0!`
+//     );
+
+//     for (let i = index - 1; i >= 0 && arr[i] === 10; i--) {
+//       arr[i] = 0;
+//       if (i > 0) arr[i - 1] += 1;
+//     }
+
+//     arr[index] = 0;
+//   }
+// });
+
+// console.log("Измененный массив:", arr);
+
+// let digits = [1, 9, 9, 3, 9, 10];
+
+// var plusOne = function (digits) {
+//   digits.forEach((element, index) => {
+//     if (element === 10 && index > 0) {
+//       for (let i = index - 1; i >= 0 && digits[i] === 10; i--) {
+//         digits[i] = 0;
+//         if (i > 0) digits[i - 1] += 1;
+//       }
+//       digits[index] = 0;
+//     }
+//   });
+//   return digits;
+// };
+
+// console.log(plusOne(digits));
+
+// function increasePreviousIf10(arr) {
+//   arr.forEach((element, index) => {
+//     if (element === 10 && index > 0) {
+//       console.log(
+//         `Найдено число 10 в массиве на позиции ${index}, увеличиваем предыдущие элементы на 1 и заменяем текущий элемент на 0!`
+//       );
+
+//       for (let i = index - 1; i >= 0 && arr[i] === 10; i--) {
+//         arr[i] = 0;
+//         if (i > 0) arr[i - 1] += 1;
+//       }
+
+//       arr[index] = 0;
+//     }
+//   });
+
+//   return arr;
+// }
+
+// const myArray = [1, 2, 3, 4, 5, 10, 6, 7, 10, 9, 10];
+// console.log("Изначальный массив:", myArray);
+
+// const modifiedArray = increasePreviousIf10(myArray);
+// console.log("Измененный массив:", modifiedArray);
+
+// function plusOne(digits) {
+//   let sum = BigInt(digits.join("")) + 1n;
+//   console.log(sum.toString().split(""));
+// }
+
+// digits = [1, 2, 9];
+
+// plusOne(digits);
+
+// digits;
