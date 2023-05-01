@@ -1,3 +1,5 @@
+// "use strict";
+
 /*
 const user = {
   name: "John",
@@ -1335,8 +1337,70 @@ ladder.up().up().up().up().up().up().up().down().showStep().down().showStep();
 //   console.log(sum.toString().split(""));
 // }
 
-// digits = [1, 2, 9];
+// digits = [1, 9, 9];
 
 // plusOne(digits);
 
 // digits;
+
+// console.log(0.1 + 2.8);
+
+// let result = [];
+
+// var addBinary = function (a, b) {
+//   for (let i = 0; i < a.length; i++) {
+//     for (let j = 0; j < b.length; j++) {
+//       if (a[i] + b[j] == 0) {
+//         result.push("1");
+//       } else if (a[i] + b[j] == 1) {
+//         result.push("1");
+//       } else {
+//         result.push("0");
+//       }
+//     }
+//   }
+//   return result;
+// };
+
+// console.log(addBinary([0, 1, 0, 1, 1], [1, 0, 1, 1, 0]));
+
+// let a = parseInt("10100000100100110110010000010101111011011001101110111111111101000000101111001110001111100001101", 2);
+// let b = parseInt("1", 2);
+
+// console.log(a + b);
+
+// num = a + b
+
+// console.log(num.toString(2));
+
+// let s = "()[]{}";
+
+// let q = s.split("");
+
+// function check() {
+//   return q.length % 2 == 0 ? true : false;
+// }
+// console.log(check());
+// console.log(q.length % 2 == 0);
+
+// salary = [
+//   25000, 48000, 57000, 86000, 33000, 10000, 42000, 3000, 54000, 29000, 79000,
+//   40000,
+// ];
+// let min = 0;
+// ave;
+
+// function average(salary) {
+//   return salary.sort((a, b) => a - b)
+// let sum = sliceArr.reduce((ind, a) => ind + a);
+// return sum / sliceArr.length;
+// salary.sort().shift();
+// salary.pop();
+// let sum = salary.reduce((ind, a) => ind + a);
+// ave = sum / salary.length;
+// return ave
+// }
+
+// salary.sort();
+
+// console.log(average(salary));
