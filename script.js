@@ -1404,3 +1404,23 @@ ladder.up().up().up().up().up().up().up().down().showStep().down().showStep();
 // salary.sort();
 
 // console.log(average(salary));
+
+let flowerbed = [1, 0, 0, 0, 1, 0, 1];
+let n = 1;
+
+function canPlaceFlowers(flowerbed, n) {
+  for (let i = 0; i < flowerbed.length - 2; i++) {
+    for (let j = i + 1; j < flowerbed.length - 1; j++) {
+      for (let k = j + 1; k < flowerbed.length; k++) {
+        if (flowerbed[i] == flowerbed[j] && flowerbed[j] == flowerbed[k]) {
+          flowerbed[j] = 1;
+          n--;
+        }
+      }
+    }
+  }
+  console.log(flowerbed);
+  return n == 0 ? true : false;
+}
+
+console.log(canPlaceFlowers(flowerbed, n));
