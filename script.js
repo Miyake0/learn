@@ -1405,22 +1405,70 @@ ladder.up().up().up().up().up().up().up().down().showStep().down().showStep();
 
 // console.log(average(salary));
 
-let flowerbed = [1, 0, 0, 0, 1, 0, 1];
-let n = 1;
+// let flowerbed = [1, 0, 0, 0, 1, 0, 1];
+// let n = 1;
 
-function canPlaceFlowers(flowerbed, n) {
-  for (let i = 0; i < flowerbed.length - 2; i++) {
-    for (let j = i + 1; j < flowerbed.length - 1; j++) {
-      for (let k = j + 1; k < flowerbed.length; k++) {
-        if (flowerbed[i] == flowerbed[j] && flowerbed[j] == flowerbed[k]) {
-          flowerbed[j] = 1;
-          n--;
-        }
-      }
-    }
-  }
-  console.log(flowerbed);
-  return n == 0 ? true : false;
-}
+// function canPlaceFlowers(flowerbed, n) {
+//   for (let i = 0; i < flowerbed.length - 2; i++) {
+//     for (let j = i + 1; j < flowerbed.length - 1; j++) {
+//       for (let k = j + 1; k < flowerbed.length; k++) {
+//         if (flowerbed[i] == flowerbed[j] && flowerbed[j] == flowerbed[k]) {
+//           flowerbed[j] = 1;
+//           n--;
+//         }
+//       }
+//     }
+//   }
+//   console.log(flowerbed);
+//   return n == 0 ? true : false;
+// }
 
-console.log(canPlaceFlowers(flowerbed, n));
+// console.log(canPlaceFlowers(flowerbed, n));
+
+// arr = [1, 0, 2, 3, 0, 4, 5, 0];
+
+// var duplicateZeros = function(arr) {
+//   let stack = []
+//   for (let i = 0; i < arr.length; i++) {
+//       if (arr[i] == 0) {
+//           stack.push(arr[i], arr[i])
+//       } else {
+//       stack.push(arr[i])
+//       }
+//   }
+//   return stack.slice(0,8)
+// };
+
+// console.log(duplicateZeros(arr));
+// [1,0,0,2,3,0,0,4]
+
+let n = 5;
+
+var bitwiseComplement = function (n) {
+  // let base10 = n.toString(2);
+
+  return parseInt(
+    n.toString(2).replace(/0|1/g, function (match) {
+      return match === "0" ? "1" : "0";
+    }),
+    2
+  );
+
+  // base10 = base10.replace(/0|1/g, function (match) {
+  //   return match === "0" ? "1" : "0";
+  // });
+
+  // let arr = [];
+  // for (let i = 0; i < base10.length; i++) {
+  //   if (base10[i] == 0) {
+  //     arr.push(1);
+  //   } else {
+  //     arr.push(0);
+  //   }
+  // }
+  // console.log(arr);
+  // return parseInt(arr.join(""), 10)
+  return parseInt("0102332132");
+};
+
+console.log(bitwiseComplement(5));
