@@ -1489,3 +1489,27 @@ ladder.up().up().up().up().up().up().up().down().showStep().down().showStep();
 // let firstDigit = parseInt(number.toString().substring(1, 2));
 
 // console.log(-firstDigit); // выведет
+
+// operations = ["5", "-2", "4", "C", "D", "9", "+", "+"];
+
+// var calPoints = function (operations) {
+//   record = [];
+
+//   for (let i = 0; i < operations.length; i++) {
+//     if (operations[i] == "C") {
+//       record.pop();
+//       continue;
+//     } else if (operations[i] == "D") {
+//       record.push(record[record.length - 1] * 2);
+//       continue;
+//     } else if (operations[i] == "+") {
+//       record.push(record[record.length - 1] + record[record.length - 2]);
+//       continue;
+//     } else {
+//       record.push(+operations[i]);
+//     }
+//   }
+//   return record.reduce((a, b) => a + b, 0);
+// };
+
+// console.log(calPoints(operations));
