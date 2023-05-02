@@ -1442,33 +1442,50 @@ ladder.up().up().up().up().up().up().up().down().showStep().down().showStep();
 // console.log(duplicateZeros(arr));
 // [1,0,0,2,3,0,0,4]
 
-let n = 5;
+// let n = 5;
 
-var bitwiseComplement = function (n) {
-  // let base10 = n.toString(2);
+// var bitwiseComplement = function (n) {
+//   // let base10 = n.toString(2);
 
-  return parseInt(
-    n.toString(2).replace(/0|1/g, function (match) {
-      return match === "0" ? "1" : "0";
-    }),
-    2
-  );
+//   return parseInt(
+//     n.toString(2).replace(/0|1/g, function (match) {
+//       return match === "0" ? "1" : "0";
+//     }),
+//     2
+//   );
 
-  // base10 = base10.replace(/0|1/g, function (match) {
-  //   return match === "0" ? "1" : "0";
-  // });
+// base10 = base10.replace(/0|1/g, function (match) {
+//   return match === "0" ? "1" : "0";
+// });
 
-  // let arr = [];
-  // for (let i = 0; i < base10.length; i++) {
-  //   if (base10[i] == 0) {
-  //     arr.push(1);
-  //   } else {
-  //     arr.push(0);
-  //   }
-  // }
-  // console.log(arr);
-  // return parseInt(arr.join(""), 10)
-  return parseInt("0102332132");
-};
+// let arr = [];
+// for (let i = 0; i < base10.length; i++) {
+//   if (base10[i] == 0) {
+//     arr.push(1);
+//   } else {
+//     arr.push(0);
+//   }
+// }
+// console.log(arr);
+// return parseInt(arr.join(""), 10)
+// return parseInt("0102332132");
+// };
 
-console.log(bitwiseComplement(5));
+// console.log(bitwiseComplement(10));
+// let nums = [-1]
+
+// var arraySign = function (nums) {
+//   mul = 1;
+//   for (let i = 0; i < nums.length; i++) {
+//     mul *= nums[i];
+//     console.log(nums[i]);
+//   }
+//   return parseInt(mul.toString().split(" ")[0]) :;
+// };
+
+// console.log(arraySign(nums));
+
+// let number = -1234;
+// let firstDigit = parseInt(number.toString().substring(1, 2));
+
+// console.log(-firstDigit); // выведет
