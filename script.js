@@ -1513,3 +1513,28 @@ ladder.up().up().up().up().up().up().up().down().showStep().down().showStep();
 // };
 
 // console.log(calPoints(operations));
+
+// stack = []
+
+// function non(a, b) {
+//   for (let i = a; i <= b; i++) {
+//     stack.push(a)
+//     a++;
+//   }
+//   return stack
+// }
+
+// console.log(non(-2, 4))
+
+// console.log(stack.reduce((A, B) => A + B))
+
+// var arrangeCoins = function (n) {
+//   let count = 0;
+//   for (let i = 1; n > 0; i++) {
+//     n -= i;
+//     count++;
+//   }
+//   return count - 1;
+// };
+
+// console.log(arrangeCoins(5));
