@@ -1538,3 +1538,41 @@ ladder.up().up().up().up().up().up().up().down().showStep().down().showStep();
 // };
 
 // console.log(arrangeCoins(5));
+
+// var findDifference = function (nums1, nums2) {
+//   let result1 = nums1.filter((word) => word.length > 0);
+//   console.log(result1);
+//   return result1;
+// };
+
+// console.log(findDifference([1, 2, 3, 3], [1, 1, 2, 2]));
+
+const senate = ["RDDRDR"];
+
+function calc() {
+  let radiant = [];
+  let dire = [];
+
+  const n = senate.length;
+
+  for (i = 0; i < n; i++) {
+    if (senate[i] === "R") {
+      radiant.push(i + n);
+    } else {
+      dire.push(i + n);
+    }
+  }
+
+  while (radiant.length > 0 && dire.length > 0) {
+    if (radiant[0] < dire[0]) {
+      radiant.push(radiant[0] + n);
+    } else {
+      dire.push(dire[0] + n);
+    }
+    radiant.shift();
+    dire.shift();
+  }
+  return radiant.length > 0 ? "Radiant" : "Dire";
+}
+
+console.log(calc(senate));
