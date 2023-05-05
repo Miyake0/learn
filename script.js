@@ -1547,32 +1547,55 @@ ladder.up().up().up().up().up().up().up().down().showStep().down().showStep();
 
 // console.log(findDifference([1, 2, 3, 3], [1, 1, 2, 2]));
 
-const senate = ["RDDRDR"];
+// const senate = ["RDDRDR"];
 
-function calc() {
-  let radiant = [];
-  let dire = [];
+// function calc() {
+//   let radiant = [];
+//   let dire = [];
 
-  const n = senate.length;
+//   const n = senate.length;
 
-  for (i = 0; i < n; i++) {
-    if (senate[i] === "R") {
-      radiant.push(i + n);
-    } else {
-      dire.push(i + n);
-    }
-  }
+//   for (i = 0; i < n; i++) {
+//     if (senate[i] === "R") {
+//       radiant.push(i + n);
+//     } else {
+//       dire.push(i + n);
+//     }
+//   }
 
-  while (radiant.length > 0 && dire.length > 0) {
-    if (radiant[0] < dire[0]) {
-      radiant.push(radiant[0] + n);
-    } else {
-      dire.push(dire[0] + n);
-    }
-    radiant.shift();
-    dire.shift();
-  }
-  return radiant.length > 0 ? "Radiant" : "Dire";
-}
+//   while (radiant.length > 0 && dire.length > 0) {
+//     if (radiant[0] < dire[0]) {
+//       radiant.push(radiant[0] + n);
+//     } else {
+//       dire.push(dire[0] + n);
+//     }
+//     radiant.shift();
+//     dire.shift();
+//   }
+//   return radiant.length > 0 ? "Radiant" : "Dire";
+// }
 
-console.log(calc(senate));
+// console.log(calc(senate));
+
+// var maxVowels = function (s, k) {
+//   let maxCount = 0;
+//   const vowels = /[aeiou]/g;
+//   // let found = s.match(vowels);
+
+//   for (let i = 0; i < s.length; i++) {
+//     if (s.slice(0, 2).math(vowels) && s.slice(0, 2).math(vowels).length > maxCount) {
+//         maxCount =
+//     }
+//     continue
+//   }
+
+//   return found.length;
+// };
+
+// console.log(maxVowels("abciiidef", 3))
+// s = "aeweqsdwq";
+
+// const vowels = /[aeiou]/g;
+// console.log(s.match(vowels));
+// let count;
+// console.log(count = s.match(vowels).length)
