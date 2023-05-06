@@ -1698,12 +1698,22 @@ ladder.up().up().up().up().up().up().up().down().showStep().down().showStep();
 
 // console.log(merge([1, 2, 3, 0, 0, 0], 3, [2, 5, 6], 3));
 
-var sortSentence = function (s) {
-  s = s.split(" ");
+// var sortSentence = function (s) {
+//   s = s.split(" ");
 
-  s = s.sort((a, b) => a[a.length - 1] - b[b.length - 1]);
+//   s = s.sort((a, b) => a[a.length - 1] - b[b.length - 1]);
 
-  return s.join(" ").replace(/[0-9]/g, "");
+//   return s.join(" ").replace(/[0-9]/g, "");
+// };
+
+// console.log(sortSentence("This2 sentence4 This1 a3"));
+
+var sumBase = function (n, k) {
+  return n
+    .toString(k)
+    .split("")
+    .map(Number)
+    .reduce((a, b) => a + b);
 };
 
-console.log(sortSentence("This2 sentence4 This1 a3"));
+console.log(sumBase(34, 6));
