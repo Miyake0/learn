@@ -1644,18 +1644,56 @@ ladder.up().up().up().up().up().up().up().down().showStep().down().showStep();
 //     }
 //     console.log(pows)
 
-let nums1 = [1, 2, 3],
-  nums2 = [2, 4, 6];
+// let nums1 = [1, 2, 3],
+//   nums2 = [2, 4, 6];
 
-var findDifference = function (nums1, nums2) {
-  return [
-    nums1.filter(
-      (item, pos) => nums1.indexOf(item) == pos && !nums2.includes(item)
-    ),
-    nums2.filter(
-      (item, pos) => nums2.indexOf(item) == pos && !nums1.includes(item)
-    ),
-  ];
+// var findDifference = function (nums1, nums2) {
+//   return [
+//     nums1.filter(
+//       (item, pos) => nums1.indexOf(item) == pos && !nums2.includes(item)
+//     ),
+//     nums2.filter(
+//       (item, pos) => nums2.indexOf(item) == pos && !nums1.includes(item)
+//     ),
+//   ];
+// };
+
+// console.log(findDifference(nums1, nums2));
+
+// function* gen() {
+//   // Передаём вопрос во внешний код и ожидаем ответа
+//   let result = yield "2 + 3 = ?"; // (*)
+
+//   console.log(result);
+// }
+
+// let generator = gen();
+
+// let question = generator.next().value; // <-- yield возвращает значение
+
+// generator.next(4); // --> передаём результат в генератор
+
+// function* gen() {
+//   try {
+//     let result = yield "2 + 2 = ?"; // (1)
+
+//     alert(
+//       "Выполнение программы не дойдёт до этой строки, потому что выше возникнет исключение"
+//     );
+//   } catch (e) {
+//     console.log(e); // покажет ошибку
+//   }
+// }
+
+// let generator = gen();
+
+// let question = generator.next().value;
+
+// generator.throw(new Error("Ответ не найден в моей базе данных")); // (2)
+
+var merge = function (nums1, m, nums2, n) {
+  nums1 = nums1.slice(0, m);
+  return nums1.concat(nums2).sort((a, b) => a - b);
 };
 
-console.log(findDifference(nums1, nums2));
+console.log(merge([1, 2, 3, 0, 0, 0], 3, [2, 5, 6], 3));
