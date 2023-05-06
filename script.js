@@ -1599,3 +1599,63 @@ ladder.up().up().up().up().up().up().up().down().showStep().down().showStep();
 // console.log(s.match(vowels));
 // let count;
 // console.log(count = s.match(vowels).length)
+
+// var defangIPaddr = function (address) {
+//   let add = address.split(".");
+//   let arr = [];
+//   for (let elem of add) {
+//     !elem != add.length - 1 ? arr.push(add[i] + "[.]") : arr.push(add[i]);
+//   }
+//   return arr.join("");
+// };
+
+// console.log(defangIPaddr("255.100.50.0"));
+
+// var numSubseq = function (nums, target) {
+//   nums.sort((a, b) => a - b);
+//   let n = nums.length;
+//   let left = 0;
+//   const MOD = 1000000007;
+//   right = n - 1;
+//   let count = 0;
+//   const pow = new Array(nums.length).fill(1);
+//   let mod = 1000000007;
+
+//   for (let i = 0; i < nums.length; i++) {
+//     pow[i] = (pow[i - 1] * 2) % MOD;
+//     for (let j = i; j < nums.length - 1; j++) {}
+//   }
+//   return pow
+// };
+
+// console.log(numSubseq([3, 4, 5, 5, 7, 8, 9], 10))
+
+// nums = [3, 4, 5, 5, 7, 8, 9]
+// target = 10
+
+// const MOD = 1000000007;
+
+// nums = nums.sort((a, b) => a - b);
+
+// const pows = [1];
+
+//     for (let i = 1; i < nums.length; i++) {
+//         pows.push(pows[i - 1] * 2 % MOD);
+//     }
+//     console.log(pows)
+
+let nums1 = [1, 2, 3],
+  nums2 = [2, 4, 6];
+
+var findDifference = function (nums1, nums2) {
+  return [
+    nums1.filter(
+      (item, pos) => nums1.indexOf(item) == pos && !nums2.includes(item)
+    ),
+    nums2.filter(
+      (item, pos) => nums2.indexOf(item) == pos && !nums1.includes(item)
+    ),
+  ];
+};
+
+console.log(findDifference(nums1, nums2));
