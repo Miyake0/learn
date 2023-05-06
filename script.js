@@ -1691,9 +1691,26 @@ ladder.up().up().up().up().up().up().up().down().showStep().down().showStep();
 
 // generator.throw(new Error("Ответ не найден в моей базе данных")); // (2)
 
-var merge = function (nums1, m, nums2, n) {
-  nums1 = nums1.slice(0, m);
-  return nums1.concat(nums2).sort((a, b) => a - b);
+// var merge = function (nums1, m, nums2, n) {
+//   nums1 = nums1.slice(0, m);
+//   return nums1.concat(nums2).sort((a, b) => a - b);
+// };
+
+// console.log(merge([1, 2, 3, 0, 0, 0], 3, [2, 5, 6], 3));
+
+var sortSentence = function (s) {
+  s = s.split(" ");
+
+  arr = [];
+
+  for (let i = 0; i < s.length; i++) {
+    if (s[i].includes(i)) {
+      arr.push(s[i]);
+      console.log(s[i]);
+    }
+  }
+
+  return arr;
 };
 
-console.log(merge([1, 2, 3, 0, 0, 0], 3, [2, 5, 6], 3));
+console.log(sortSentence("is2 sentence4 This1 a3"));
