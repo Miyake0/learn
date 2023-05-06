@@ -1701,16 +1701,9 @@ ladder.up().up().up().up().up().up().up().down().showStep().down().showStep();
 var sortSentence = function (s) {
   s = s.split(" ");
 
-  arr = [];
+  s = s.sort((a, b) => a[a.length - 1] - b[b.length - 1]);
 
-  for (let i = 0; i < s.length; i++) {
-    if (s[i].includes(i)) {
-      arr.push(s[i]);
-      console.log(s[i]);
-    }
-  }
-
-  return arr;
+  return s.join(" ").replace(/[0-9]/g, "");
 };
 
-console.log(sortSentence("is2 sentence4 This1 a3"));
+console.log(sortSentence("This2 sentence4 This1 a3"));
