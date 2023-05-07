@@ -1708,12 +1708,12 @@ ladder.up().up().up().up().up().up().up().down().showStep().down().showStep();
 
 // console.log(sortSentence("This2 sentence4 This1 a3"));
 
-var sumBase = function (n, k) {
-  return n
-    .toString(k)
-    .split("")
-    .map(Number)
-    .reduce((a, b) => a + b);
-};
+// var sumBase = function (n, k) {
+//   return n
+//     .toString(k)
+//     .split("")
+//     .map(Number)
+//     .reduce((a, b) => a + b);
+// };
 
-console.log(sumBase(34, 6));
+// console.log(sumBase(34, 6));
