@@ -1717,3 +1717,76 @@ ladder.up().up().up().up().up().up().up().down().showStep().down().showStep();
 // };
 
 // console.log(sumBase(34, 6));
+
+// var reverseBits = function (n) {
+//   return String(n).split("").reverse().join("")
+// };
+
+// console.log(reverseBits(00000010100101000001111010011100));
+// var sortArrayByParityII = function (nums) {
+//   let stack = [];
+//   for (let i = 0; i < nums.length; i++) {
+//     if (nums[i] % 2 == 0) {
+//       stack.push(nums[i]);
+//     } else {
+//       stack.push(nums[i]);
+//     }
+//   }
+//   return stack;
+// };
+
+// console.log(sortArrayByParityII([4, 2, 5, 7]));
+
+// var numUniqueEmails = function (emails) {
+//   // emails = emails.join(" ").replace(".", "").split(" ");
+
+//   emails = emails.join(" ").split("");
+
+//   for (let i = 0; i < emails.length; i++) {
+//     if (emails[i] == ".") {
+//       emails[i].replace(".", "");
+//     } else if (emails[i] == "+") {
+//       emails[i].split("?")[0];
+//     }
+//     return emails.join("");
+//   }
+
+//  ;
+
+//   // let set = new Set(emails);
+
+//   return emails;
+// };
+
+// console.log(
+//   numUniqueEmails([
+//     "test.email+alex@leetcode.com",
+//     "test.e.mail+bob.cathy@leetcode.com",
+//     // "testemail+david@lee.tcode.com",
+//   ])
+// );
+
+var diagonalSum = function (mat) {
+  let result = 0;
+  let left = 0,
+    right = mat.length - 1;
+  for (let i = 0; i < mat.length; i++) {
+    if (left == right) {
+      result += mat[i][left]; // or mat[i][right]
+    } else {
+      result += mat[i][left];
+      result += mat[i][right];
+    }
+    left++;
+    right--;
+  }
+  return result;
+};
+
+console.log(
+  diagonalSum([
+    [1, 1, 1],
+    [4, 1, 1],
+    [7, 8, 9],
+  ])
+);
