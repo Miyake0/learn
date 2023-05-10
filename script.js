@@ -1766,27 +1766,116 @@ ladder.up().up().up().up().up().up().up().down().showStep().down().showStep();
 //   ])
 // );
 
-var diagonalSum = function (mat) {
-  let result = 0;
-  let left = 0,
-    right = mat.length - 1;
-  for (let i = 0; i < mat.length; i++) {
-    if (left == right) {
-      result += mat[i][left]; // or mat[i][right]
-    } else {
-      result += mat[i][left];
-      result += mat[i][right];
+// var diagonalSum = function (mat) {
+//   let result = 0;
+//   let left = 0,
+//     right = mat.length - 1;
+//   for (let i = 0; i < mat.length; i++) {
+//     if (left == right) {
+//       result += mat[i][left]; // or mat[i][right]
+//     } else {
+//       result += mat[i][left];
+//       result += mat[i][right];
+//     }
+//     left++;
+//     right--;
+//   }
+//   return result;
+// };
+
+// console.log(
+//   diagonalSum([
+//     [1, 1, 1],
+//     [4, 1, 1],
+//     [7, 8, 9],
+//   ])
+// );
+
+// document.body.style.background = "red";
+
+// setTimeout(() => (document.body.style.background = ""), 3000); // вернуть назад
+
+// var firstPalindrome = function (words) {
+//   return words
+// };
+
+// console.log(firstPalindrome(["abc", "car", "ada", "racecar", "cool"]));
+
+// var spiralOrder = function (matrix) {
+//   let top = 0;
+//   let left = 0;
+//   let bottom = matrix.length - 1;
+//   let right = matrix[0].length - 1;
+//   const result = [];
+//   const size = matrix.length * matrix[0].length;
+
+//   while (result.length < size) {
+//     for (let i = left; i <= right && result.length < size; i++) {
+//       result.push(matrix[top][i]);
+//     }
+//     top++;
+
+//     for (let i = top; i <= bottom && result.length < size; i++) {
+//       result.push(matrix[i][right]);
+//     }
+//     right--;
+
+//     for (let i = right; i >= left && result.length < size; i--) {
+//       result.push(matrix[bottom][i]);
+//     }
+//     bottom--;
+
+//     for (let i = bottom; i >= top && result.length < size; i--) {
+//       result.push(matrix[i][left]);
+//     }
+//     left++;
+//   }
+//   return result;
+// };
+
+// console.log(
+//   spiralOrder([
+//     [1, 2, 3],
+//     [4, 5, 6],
+//     [7, 8, 9],
+//   ])
+// );
+
+var generateMatrix = function (n) {
+  let output = new Array(n).fill(0).map(() => new Array(n).fill(0));
+  let count = 0;
+  let left = 0;
+  let right = n - 1;
+  let bottom = n - 1;
+  let top = 0;
+  let size = n * n;
+
+  while (count < size) {
+    for (let i = left; i <= right; i++) {
+      count++;
+      output[top][i] = count;
+    }
+    top++;
+
+    for (let i = top; i <= bottom; i++) {
+      count++;
+      output[i][right] = count;
+    }
+    right--;
+
+    for (let i = right; i >= left; i++) {
+      count++;
+      output[bottom][i] = count;
+    }
+    bottom--;
+
+    for (let i = bottom; i >= top; i++) {
+      count++;
+      output[i][left] = count;
     }
     left++;
-    right--;
   }
-  return result;
+  return output;
 };
 
-console.log(
-  diagonalSum([
-    [1, 1, 1],
-    [4, 1, 1],
-    [7, 8, 9],
-  ])
-);
+console.log(generateMatrix(3));
