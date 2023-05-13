@@ -1841,41 +1841,63 @@ ladder.up().up().up().up().up().up().up().down().showStep().down().showStep();
 //   ])
 // );
 
-var generateMatrix = function (n) {
-  let output = new Array(n).fill(0).map(() => new Array(n).fill(0));
-  let count = 0;
-  let left = 0;
-  let right = n - 1;
-  let bottom = n - 1;
-  let top = 0;
-  let size = n * n;
+// var generateMatrix = function (n) {
+//   let output = new Array(n).fill(0).map(() => new Array(n).fill(0));
+//   let count = 0;
+//   let left = 0;
+//   let right = n - 1;
+//   let bottom = n - 1;
+//   let top = 0;
+//   let size = n * n;
 
-  while (count < size) {
-    for (let i = left; i <= right; i++) {
-      count++;
-      output[top][i] = count;
-    }
-    top++;
+//   while (count < size) {
+//     for (let i = left; i <= right; i++) {
+//       count++;
+//       output[top][i] = count;
+//     }
+//     top++;
 
-    for (let i = top; i <= bottom; i++) {
-      count++;
-      output[i][right] = count;
-    }
-    right--;
+//     for (let i = top; i <= bottom; i++) {
+//       count++;
+//       output[i][right] = count;
+//     }
+//     right--;
 
-    for (let i = right; i >= left; i++) {
-      count++;
-      output[bottom][i] = count;
-    }
-    bottom--;
+//     for (let i = right; i >= left; i++) {
+//       count++;
+//       output[bottom][i] = count;
+//     }
+//     bottom--;
 
-    for (let i = bottom; i >= top; i++) {
-      count++;
-      output[i][left] = count;
+//     for (let i = bottom; i >= top; i++) {
+//       count++;
+//       output[i][left] = count;
+//     }
+//     left++;
+//   }
+//   return output;
+// };
+
+// console.log(generateMatrix(3));
+
+var countGoodStrings = function (low, high, zero, one) {
+  const modulo = 1e9 + 7;
+  let answ = 0;
+  const dp = Array(high + 1).fill(0);
+  dp[0] = 1;
+  for (let i = 1; i <= high; i++) {
+    if (i - zero >= 0) {
+      dp[i] = (dp[i] + dp[i - zero]) % modulo;
     }
-    left++;
+    if (i - one >= 0) {
+      dp[i] = (dp[i] + dp[i - one]) % modulo;
+    }
+
+    // if i >= low start counting the total number of strings
+    if (i >= low) {
+      answ = (answ + dp[i]) % modulo;
+    }
   }
-  return output;
-};
 
-console.log(generateMatrix(3));
+  return answ;
+};
