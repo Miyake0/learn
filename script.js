@@ -1880,24 +1880,52 @@ ladder.up().up().up().up().up().up().up().down().showStep().down().showStep();
 
 // console.log(generateMatrix(3));
 
-var countGoodStrings = function (low, high, zero, one) {
-  const modulo = 1e9 + 7;
-  let answ = 0;
-  const dp = Array(high + 1).fill(0);
-  dp[0] = 1;
-  for (let i = 1; i <= high; i++) {
-    if (i - zero >= 0) {
-      dp[i] = (dp[i] + dp[i - zero]) % modulo;
-    }
-    if (i - one >= 0) {
-      dp[i] = (dp[i] + dp[i - one]) % modulo;
-    }
+// var countGoodStrings = function (low, high, zero, one) {
+//   const modulo = 1e9 + 7;
+//   let answ = 0;
+//   const dp = Array(high + 1).fill(0);
+//   dp[0] = 1;
+//   for (let i = 1; i <= high; i++) {
+//     if (i - zero >= 0) {
+//       dp[i] = (dp[i] + dp[i - zero]) % modulo;
+//     }
+//     if (i - one >= 0) {
+//       dp[i] = (dp[i] + dp[i - one]) % modulo;
+//     }
 
-    // if i >= low start counting the total number of strings
-    if (i >= low) {
-      answ = (answ + dp[i]) % modulo;
-    }
+//
+//     if (i >= low) {
+//       answ = (answ + dp[i]) % modulo;
+//     }
+//   }
+
+//   return answ;
+// };
+
+var maxScore = function (nums) {
+  const cache = new Map();
+  function gcd(a, b) {
+    if (!b) return a;
+    return gcd(b, a % b);
   }
-
-  return answ;
+  function helper(arr, num, op) {
+    if (!arr.length) return 0;
+    const key = arr.join() + num;
+    if (cache.has(key)) return cache.get(key);
+    let max = 0;
+    for (let i = 0; i < arr.length; i++) {
+      const nextArr = [...arr.slice(0, i), ...arr.slice(i + 1)];
+      if (num) {
+        const currGCD = gcd(num, arr[i]);
+        const rest = helper(nextArr, null, op + 1);
+        max = Math.max(max, op * currGCD + rest);
+      } else {
+        const rest = helper(nextArr, arr[i], op);
+        max = Math.max(max, rest);
+      }
+    }
+    cache.set(key, max);
+    return max;
+  }
+  return helper(nums, null, 1);
 };
