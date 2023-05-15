@@ -1996,6 +1996,89 @@ class Graph {
     // Если путь не найден
     return null;
   }
+
+  findMinCut(sourceVertex, sinkVertex) {
+    // Создаем копию графа
+    const residualGraph = JSON.parse(JSON.stringify(this.vertices));
+
+    let maxFlow = 0; // Максимальный поток
+    const parent = {}; // Хранит путь в виде дерева
+    let hasAugmentingPath = true;
+
+    while (hasAugmentingPath) {
+      // Ищем путь в остаточном графе с помощью алгоритма поиска в ширину
+      hasAugmentingPath = false;
+      const queue = [sourceVertex];
+      parent[sourceVertex] = null;
+
+      while (queue.length > 0) {
+        const currentVertex = queue.shift();
+
+        for (let neighbor in residualGraph[currentVertex]) {
+          if (!parent[neighbor] && residualGraph[currentVertex][neighbor] > 0) {
+            parent[neighbor] = currentVertex;
+            queue.push(neighbor);
+          }
+        }
+      }
+
+      // Если найден путь до стока
+      if (parent[sinkVertex]) {
+        hasAugmentingPath = true;
+
+        let pathFlow = Infinity;
+        let v = sinkVertex;
+
+        // Находим минимальную пропускную способность на пути
+        while (v !== sourceVertex) {
+          const u = parent[v];
+          pathFlow = Math.min(pathFlow, residualGraph[u][v]);
+          v = u;
+        }
+
+        // Обновляем остаточные пропускные способности графа
+        v = sinkVertex;
+        while (v !== sourceVertex) {
+          const u = parent[v];
+          residualGraph[u][v] -= pathFlow;
+          residualGraph[v][u] += pathFlow;
+          v = u;
+        }
+
+        maxFlow += pathFlow;
+      }
+    }
+
+    // После выполнения алгоритма Форда-Фалкерсона остаточные ребра графа образуют минимальный разрез
+    const minCut = [];
+
+    // Помечаем вершины, достижимые из источника
+    const visited = {};
+    const queue = [sourceVertex];
+    visited[sourceVertex] = true;
+
+    while (queue.length > 0) {
+      const currentVertex = queue.shift();
+
+      for (let neighbor in residualGraph[currentVertex]) {
+        if (!visited[neighbor] && residualGraph[currentVertex][neighbor] > 0) {
+          visited[neighbor] = true;
+          queue.push(neighbor);
+        }
+      }
+    }
+
+    // Все ребра, исходящие из посещенных вершин, являются частью минимального разреза
+    for (let vertex in this.vertices) {
+      for (let neighbor in this.vertices[vertex]) {
+        if (visited[vertex] && !visited[neighbor]) {
+          minCut.push({ vertex1: vertex, vertex2: neighbor });
+        }
+      }
+    }
+
+    return { minCut, maxFlow };
+  }
 }
 
 class PriorityQueue {
@@ -2113,7 +2196,10 @@ graph.addEdge("12", "13", 3);
 
 const shortestPath = graph.dijkstra("0", "12");
 const MST = graph.primMST();
+const minCut = graph.findMinCut("0", "12");
 
 console.log("Shortest Path:", shortestPath.path);
 console.log("Total Weight:", shortestPath.totalWeight);
 console.log("Minimum Spanning Tree:", MST);
+console.log("Minimum Cut:", minCut.minCut);
+console.log("Max Flow:", minCut.maxFlow);
