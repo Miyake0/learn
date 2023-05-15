@@ -1964,14 +1964,19 @@ class Graph {
     while (!queue.isEmpty()) {
       const currentVertex = queue.dequeue().element;
       if (currentVertex === endVertex) {
-        // Построение пути
+        // Построение пути и вычисление суммы
         const path = [];
         let vertex = endVertex;
+        let totalWeight = 0; // Переменная для хранения суммы весов
         while (vertex !== null) {
           path.unshift(vertex);
-          vertex = previous[vertex];
+          const previousVertex = previous[vertex];
+          if (previousVertex !== null) {
+            totalWeight += this.vertices[vertex][previousVertex];
+          }
+          vertex = previousVertex;
         }
-        return path;
+        return { path, totalWeight };
       }
 
       if (!visited[currentVertex]) {
@@ -2025,6 +2030,42 @@ class PriorityQueue {
   }
 }
 
+Graph.prototype.primMST = function () {
+  const visited = {};
+  const MST = [];
+
+  // Выбираем произвольную начальную вершину
+  const startVertex = Object.keys(this.vertices)[0];
+  visited[startVertex] = true;
+
+  while (Object.keys(visited).length < Object.keys(this.vertices).length) {
+    let minEdge = null;
+
+    // Поиск ребра с минимальным весом, которое связывает посещенную и непосещенную вершину
+    for (let visitedVertex in visited) {
+      const neighbors = this.vertices[visitedVertex];
+      for (let neighbor in neighbors) {
+        if (!visited[neighbor]) {
+          if (minEdge === null || neighbors[neighbor] < minEdge.weight) {
+            minEdge = {
+              vertex1: visitedVertex,
+              vertex2: neighbor,
+              weight: neighbors[neighbor],
+            };
+          }
+        }
+      }
+    }
+
+    if (minEdge !== null) {
+      visited[minEdge.vertex2] = true;
+      MST.push(minEdge);
+    }
+  }
+
+  return MST;
+};
+
 const graph = new Graph();
 
 graph.addVertex("0");
@@ -2071,4 +2112,8 @@ graph.addEdge("10", "13", 3);
 graph.addEdge("12", "13", 3);
 
 const shortestPath = graph.dijkstra("0", "12");
-console.log("Shortest Path:", shortestPath);
+const MST = graph.primMST();
+
+console.log("Shortest Path:", shortestPath.path);
+console.log("Total Weight:", shortestPath.totalWeight);
+console.log("Minimum Spanning Tree:", MST);
