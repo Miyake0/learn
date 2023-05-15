@@ -1902,30 +1902,166 @@ ladder.up().up().up().up().up().up().up().down().showStep().down().showStep();
 //   return answ;
 // };
 
-var maxScore = function (nums) {
-  const cache = new Map();
-  function gcd(a, b) {
-    if (!b) return a;
-    return gcd(b, a % b);
+// var maxScore = function (nums) {
+//   const cache = new Map();
+//   function gcd(a, b) {
+//     if (!b) return a;
+//     return gcd(b, a % b);
+//   }
+//   function helper(arr, num, op) {
+//     if (!arr.length) return 0;
+//     const key = arr.join() + num;
+//     if (cache.has(key)) return cache.get(key);
+//     let max = 0;
+//     for (let i = 0; i < arr.length; i++) {
+//       const nextArr = [...arr.slice(0, i), ...arr.slice(i + 1)];
+//       if (num) {
+//         const currGCD = gcd(num, arr[i]);
+//         const rest = helper(nextArr, null, op + 1);
+//         max = Math.max(max, op * currGCD + rest);
+//       } else {
+//         const rest = helper(nextArr, arr[i], op);
+//         max = Math.max(max, rest);
+//       }
+//     }
+//     cache.set(key, max);
+//     return max;
+//   }
+//   return helper(nums, null, 1);
+// };
+
+class Graph {
+  constructor() {
+    this.vertices = {};
   }
-  function helper(arr, num, op) {
-    if (!arr.length) return 0;
-    const key = arr.join() + num;
-    if (cache.has(key)) return cache.get(key);
-    let max = 0;
-    for (let i = 0; i < arr.length; i++) {
-      const nextArr = [...arr.slice(0, i), ...arr.slice(i + 1)];
-      if (num) {
-        const currGCD = gcd(num, arr[i]);
-        const rest = helper(nextArr, null, op + 1);
-        max = Math.max(max, op * currGCD + rest);
+
+  addVertex(vertex) {
+    this.vertices[vertex] = {};
+  }
+
+  addEdge(vertex1, vertex2, weight) {
+    this.vertices[vertex1][vertex2] = weight;
+    this.vertices[vertex2][vertex1] = weight;
+  }
+
+  dijkstra(startVertex, endVertex) {
+    const distances = {};
+    const visited = {};
+    const previous = {};
+    const queue = new PriorityQueue();
+
+    for (let vertex in this.vertices) {
+      if (vertex === startVertex) {
+        distances[vertex] = 0;
+        queue.enqueue(vertex, 0);
       } else {
-        const rest = helper(nextArr, arr[i], op);
-        max = Math.max(max, rest);
+        distances[vertex] = Infinity;
+        queue.enqueue(vertex, Infinity);
+      }
+      previous[vertex] = null;
+    }
+
+    while (!queue.isEmpty()) {
+      const currentVertex = queue.dequeue().element;
+      if (currentVertex === endVertex) {
+        // Построение пути
+        const path = [];
+        let vertex = endVertex;
+        while (vertex !== null) {
+          path.unshift(vertex);
+          vertex = previous[vertex];
+        }
+        return path;
+      }
+
+      if (!visited[currentVertex]) {
+        visited[currentVertex] = true;
+        const neighbors = this.vertices[currentVertex];
+        for (let neighbor in neighbors) {
+          const distance = distances[currentVertex] + neighbors[neighbor];
+          if (distance < distances[neighbor]) {
+            distances[neighbor] = distance;
+            previous[neighbor] = currentVertex;
+            queue.enqueue(neighbor, distance);
+          }
+        }
       }
     }
-    cache.set(key, max);
-    return max;
+
+    // Если путь не найден
+    return null;
   }
-  return helper(nums, null, 1);
-};
+}
+
+class PriorityQueue {
+  constructor() {
+    this.items = [];
+  }
+
+  enqueue(element, priority) {
+    const queueElement = { element, priority };
+    let added = false;
+    for (let i = 0; i < this.items.length; i++) {
+      if (queueElement.priority < this.items[i].priority) {
+        this.items.splice(i, 0, queueElement);
+        added = true;
+        break;
+      }
+    }
+    if (!added) {
+      this.items.push(queueElement);
+    }
+  }
+
+  dequeue() {
+    if (this.isEmpty()) {
+      return null;
+    }
+    return this.items.shift();
+  }
+
+  isEmpty() {
+    return this.items.length === 0;
+  }
+}
+
+// Пример использования:
+
+const graph = new Graph();
+
+graph.addVertex("0");
+graph.addVertex("1");
+graph.addVertex("2");
+graph.addVertex("3");
+graph.addVertex("4");
+
+graph.addEdge("0", "1", 12);
+graph.addEdge("0", "2", 12);
+graph.addEdge("1", "3", 5);
+graph.addEdge("0", "3", 16);
+graph.addEdge("2", "3", 8);
+graph.addEdge("1", "4", 15);
+graph.addEdge("3", "4", 2);
+graph.addEdge("3", "5", 3);
+graph.addEdge("2", "5", 3);
+graph.addEdge("4", "6", 3);
+graph.addEdge("3", "6", 3);
+graph.addEdge("5", "6", 3);
+graph.addEdge("4", "7", 3);
+graph.addEdge("8", "7", 3);
+graph.addEdge("6", "8", 3);
+graph.addEdge("8", "9", 3);
+graph.addEdge("5", "9", 3);
+graph.addEdge("7", "10", 3);
+graph.addEdge("8", "10", 3);
+graph.addEdge("9", "10", 3);
+graph.addEdge("7", "11", 3);
+graph.addEdge("10", "11", 3);
+graph.addEdge("10", "12", 3);
+graph.addEdge("9", "12", 3);
+graph.addEdge("11", "13", 3);
+graph.addEdge("10", "13", 3);
+graph.addEdge("12", "13", 3);
+
+const shortestPath = graph.dijkstra("0", "12");
+console.log("Shortest Path:", shortestPath);
