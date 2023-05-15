@@ -1997,209 +1997,334 @@ class Graph {
     return null;
   }
 
-  findMinCut(sourceVertex, sinkVertex) {
-    // Создаем копию графа
-    const residualGraph = JSON.parse(JSON.stringify(this.vertices));
+  // findMinCut(sourceVertex, sinkVertex) {
+  //   // Создаем копию графа
+  //   const residualGraph = JSON.parse(JSON.stringify(this.vertices));
 
-    let maxFlow = 0; // Максимальный поток
-    const parent = {}; // Хранит путь в виде дерева
-    let hasAugmentingPath = true;
+  //   let maxFlow = 0; // Максимальный поток
+  //   const parent = {}; // Хранит путь в виде дерева
+  //   let hasAugmentingPath = true;
 
-    while (hasAugmentingPath) {
-      // Ищем путь в остаточном графе с помощью алгоритма поиска в ширину
-      hasAugmentingPath = false;
-      const queue = [sourceVertex];
-      parent[sourceVertex] = null;
+  //   while (hasAugmentingPath) {
+  //     // Ищем путь в остаточном графе с помощью алгоритма поиска в ширину
+  //     hasAugmentingPath = false;
+  //     const queue = [sourceVertex];
+  //     parent[sourceVertex] = null;
 
-      while (queue.length > 0) {
-        const currentVertex = queue.shift();
+  //     while (queue.length > 0) {
+  //       const currentVertex = queue.shift();
 
-        for (let neighbor in residualGraph[currentVertex]) {
-          if (!parent[neighbor] && residualGraph[currentVertex][neighbor] > 0) {
-            parent[neighbor] = currentVertex;
-            queue.push(neighbor);
-          }
-        }
-      }
+  //       for (let neighbor in residualGraph[currentVertex]) {
+  //         if (!parent[neighbor] && residualGraph[currentVertex][neighbor] > 0) {
+  //           parent[neighbor] = currentVertex;
+  //           queue.push(neighbor);
+  //         }
+  //       }
+  //     }
 
-      // Если найден путь до стока
-      if (parent[sinkVertex]) {
-        hasAugmentingPath = true;
+  //     // Если найден путь до стока
+  //     if (parent[sinkVertex]) {
+  //       hasAugmentingPath = true;
 
-        let pathFlow = Infinity;
-        let v = sinkVertex;
+  //       let pathFlow = Infinity;
+  //       let v = sinkVertex;
 
-        // Находим минимальную пропускную способность на пути
-        while (v !== sourceVertex) {
-          const u = parent[v];
-          pathFlow = Math.min(pathFlow, residualGraph[u][v]);
-          v = u;
-        }
+  //       // Находим минимальную пропускную способность на пути
+  //       while (v !== sourceVertex) {
+  //         const u = parent[v];
+  //         pathFlow = Math.min(pathFlow, residualGraph[u][v]);
+  //         v = u;
+  //       }
 
-        // Обновляем остаточные пропускные способности графа
-        v = sinkVertex;
-        while (v !== sourceVertex) {
-          const u = parent[v];
-          residualGraph[u][v] -= pathFlow;
-          residualGraph[v][u] += pathFlow;
-          v = u;
-        }
+  //       // Обновляем остаточные пропускные способности графа
+  //       v = sinkVertex;
+  //       while (v !== sourceVertex) {
+  //         const u = parent[v];
+  //         residualGraph[u][v] -= pathFlow;
+  //         residualGraph[v][u] += pathFlow;
+  //         v = u;
+  //       }
 
-        maxFlow += pathFlow;
-      }
-    }
+  //       maxFlow += pathFlow;
+  //     }
+  //   }
 
-    // После выполнения алгоритма Форда-Фалкерсона остаточные ребра графа образуют минимальный разрез
-    const minCut = [];
+  //   // После выполнения алгоритма Форда-Фалкерсона остаточные ребра графа образуют минимальный разрез
+  //   const minCut = [];
 
-    // Помечаем вершины, достижимые из источника
-    const visited = {};
-    const queue = [sourceVertex];
-    visited[sourceVertex] = true;
+  //   // Помечаем вершины, достижимые из источника
+  //   const visited = {};
+  //   const queue = [sourceVertex];
+  //   visited[sourceVertex] = true;
 
-    while (queue.length > 0) {
-      const currentVertex = queue.shift();
+  //   while (queue.length > 0) {
+  //     const currentVertex = queue.shift();
 
-      for (let neighbor in residualGraph[currentVertex]) {
-        if (!visited[neighbor] && residualGraph[currentVertex][neighbor] > 0) {
-          visited[neighbor] = true;
-          queue.push(neighbor);
-        }
-      }
-    }
+  //     for (let neighbor in residualGraph[currentVertex]) {
+  //       if (!visited[neighbor] && residualGraph[currentVertex][neighbor] > 0) {
+  //         visited[neighbor] = true;
+  //         queue.push(neighbor);
+  //       }
+  //     }
+  //   }
 
-    // Все ребра, исходящие из посещенных вершин, являются частью минимального разреза
-    for (let vertex in this.vertices) {
-      for (let neighbor in this.vertices[vertex]) {
-        if (visited[vertex] && !visited[neighbor]) {
-          minCut.push({ vertex1: vertex, vertex2: neighbor });
-        }
-      }
-    }
+  //   // Все ребра, исходящие из посещенных вершин, являются частью минимального разреза
+  //   for (let vertex in this.vertices) {
+  //     for (let neighbor in this.vertices[vertex]) {
+  //       if (visited[vertex] && !visited[neighbor]) {
+  //         minCut.push({ vertex1: vertex, vertex2: neighbor });
+  //       }
+  //     }
+  //   }
 
-    return { minCut, maxFlow };
-  }
+  //   return { minCut, maxFlow };
+  // }
 }
 
-class PriorityQueue {
-  constructor() {
-    this.items = [];
-  }
+// class PriorityQueue {
+//   constructor() {
+//     this.items = [];
+//   }
 
-  enqueue(element, priority) {
-    const queueElement = { element, priority };
-    let added = false;
-    for (let i = 0; i < this.items.length; i++) {
-      if (queueElement.priority < this.items[i].priority) {
-        this.items.splice(i, 0, queueElement);
-        added = true;
-        break;
-      }
-    }
-    if (!added) {
-      this.items.push(queueElement);
-    }
-  }
+//   enqueue(element, priority) {
+//     const queueElement = { element, priority };
+//     let added = false;
+//     for (let i = 0; i < this.items.length; i++) {
+//       if (queueElement.priority < this.items[i].priority) {
+//         this.items.splice(i, 0, queueElement);
+//         added = true;
+//         break;
+//       }
+//     }
+//     if (!added) {
+//       this.items.push(queueElement);
+//     }
+//   }
 
-  dequeue() {
-    if (this.isEmpty()) {
-      return null;
-    }
-    return this.items.shift();
-  }
+//   dequeue() {
+//     if (this.isEmpty()) {
+//       return null;
+//     }
+//     return this.items.shift();
+//   }
 
-  isEmpty() {
-    return this.items.length === 0;
-  }
-}
+//   isEmpty() {
+//     return this.items.length === 0;
+//   }
+// }
 
-Graph.prototype.primMST = function () {
-  const visited = {};
-  const MST = [];
+// Graph.prototype.primMST = function () {
+//   const visited = {};
+//   const MST = [];
 
-  // Выбираем произвольную начальную вершину
-  const startVertex = Object.keys(this.vertices)[0];
-  visited[startVertex] = true;
+//   // Выбираем произвольную начальную вершину
+//   const startVertex = Object.keys(this.vertices)[0];
+//   visited[startVertex] = true;
 
-  while (Object.keys(visited).length < Object.keys(this.vertices).length) {
-    let minEdge = null;
+//   while (Object.keys(visited).length < Object.keys(this.vertices).length) {
+//     let minEdge = null;
 
-    // Поиск ребра с минимальным весом, которое связывает посещенную и непосещенную вершину
-    for (let visitedVertex in visited) {
-      const neighbors = this.vertices[visitedVertex];
-      for (let neighbor in neighbors) {
-        if (!visited[neighbor]) {
-          if (minEdge === null || neighbors[neighbor] < minEdge.weight) {
-            minEdge = {
-              vertex1: visitedVertex,
-              vertex2: neighbor,
-              weight: neighbors[neighbor],
-            };
-          }
-        }
-      }
-    }
+//     // Поиск ребра с минимальным весом, которое связывает посещенную и непосещенную вершину
+//     for (let visitedVertex in visited) {
+//       const neighbors = this.vertices[visitedVertex];
+//       for (let neighbor in neighbors) {
+//         if (!visited[neighbor]) {
+//           if (minEdge === null || neighbors[neighbor] < minEdge.weight) {
+//             minEdge = {
+//               vertex1: visitedVertex,
+//               vertex2: neighbor,
+//               weight: neighbors[neighbor],
+//             };
+//           }
+//         }
+//       }
+//     }
 
-    if (minEdge !== null) {
-      visited[minEdge.vertex2] = true;
-      MST.push(minEdge);
-    }
-  }
+//     if (minEdge !== null) {
+//       visited[minEdge.vertex2] = true;
+//       MST.push(minEdge);
+//     }
+//   }
 
-  return MST;
+//   return MST;
+// };
+
+// const graph = new Graph();
+
+// graph.addVertex("0");
+// graph.addVertex("1");
+// graph.addVertex("2");
+// graph.addVertex("3");
+// graph.addVertex("4");
+// graph.addVertex("5");
+// graph.addVertex("6");
+// graph.addVertex("7");
+// graph.addVertex("8");
+// graph.addVertex("9");
+// graph.addVertex("10");
+// graph.addVertex("11");
+// graph.addVertex("12");
+// graph.addVertex("13");
+
+// graph.addEdge("0", "1", 12);
+// graph.addEdge("0", "2", 12);
+// graph.addEdge("1", "3", 5);
+// graph.addEdge("0", "3", 16);
+// graph.addEdge("2", "3", 8);
+// graph.addEdge("1", "4", 15);
+// graph.addEdge("3", "4", 2);
+// graph.addEdge("3", "5", 2);
+// graph.addEdge("2", "5", 3);
+// graph.addEdge("4", "6", 3);
+// graph.addEdge("3", "6", 3);
+// graph.addEdge("5", "6", 3);
+// graph.addEdge("4", "7", 3);
+// graph.addEdge("8", "7", 3);
+// graph.addEdge("6", "8", 3);
+// graph.addEdge("8", "9", 3);
+// graph.addEdge("5", "9", 3);
+// graph.addEdge("7", "10", 3);
+// graph.addEdge("8", "10", 3);
+// graph.addEdge("9", "10", 3);
+// graph.addEdge("7", "11", 3);
+// graph.addEdge("10", "11", 3);
+// graph.addEdge("10", "12", 3);
+// graph.addEdge("9", "12", 3);
+// graph.addEdge("11", "13", 3);
+// graph.addEdge("10", "13", 3);
+// graph.addEdge("12", "13", 3);
+
+// const shortestPath = graph.dijkstra("0", "12");
+// const MST = graph.primMST();
+
+// console.log("Shortest Path:", shortestPath.path);
+// console.log("Total Weight:", shortestPath.totalWeight);
+// console.log("Minimum Spanning Tree:", MST);
+
+/////////////////////////////////////////////////////////////
+
+const graph = {
+  A: ["B", "C", "D"],
+  B: ["A", "C"],
+  C: ["A", "B", "D"],
+  D: ["A", "C"],
 };
 
-const graph = new Graph();
+function isGraphPlanar(graph) {
+  const vertices = Object.keys(graph);
 
-graph.addVertex("0");
-graph.addVertex("1");
-graph.addVertex("2");
-graph.addVertex("3");
-graph.addVertex("4");
-graph.addVertex("5");
-graph.addVertex("6");
-graph.addVertex("7");
-graph.addVertex("8");
-graph.addVertex("9");
-graph.addVertex("10");
-graph.addVertex("11");
-graph.addVertex("12");
-graph.addVertex("13");
+  // Шаги 2 и 3: проверка числа вершин и степеней вершин
+  if (vertices.length <= 4) {
+    return true;
+  }
 
-graph.addEdge("0", "1", 12);
-graph.addEdge("0", "2", 12);
-graph.addEdge("1", "3", 5);
-graph.addEdge("0", "3", 16);
-graph.addEdge("2", "3", 8);
-graph.addEdge("1", "4", 15);
-graph.addEdge("3", "4", 2);
-graph.addEdge("3", "5", 2);
-graph.addEdge("2", "5", 3);
-graph.addEdge("4", "6", 3);
-graph.addEdge("3", "6", 3);
-graph.addEdge("5", "6", 3);
-graph.addEdge("4", "7", 3);
-graph.addEdge("8", "7", 3);
-graph.addEdge("6", "8", 3);
-graph.addEdge("8", "9", 3);
-graph.addEdge("5", "9", 3);
-graph.addEdge("7", "10", 3);
-graph.addEdge("8", "10", 3);
-graph.addEdge("9", "10", 3);
-graph.addEdge("7", "11", 3);
-graph.addEdge("10", "11", 3);
-graph.addEdge("10", "12", 3);
-graph.addEdge("9", "12", 3);
-graph.addEdge("11", "13", 3);
-graph.addEdge("10", "13", 3);
-graph.addEdge("12", "13", 3);
+  const degrees = {};
+  for (const vertex of vertices) {
+    degrees[vertex] = graph[vertex].length;
+    if (degrees[vertex] >= 3) {
+      return false;
+    }
+  }
 
-const shortestPath = graph.dijkstra("0", "12");
-const MST = graph.primMST();
-const minCut = graph.findMinCut("0", "12");
+  // Шаг 4: алгоритм вложения
+  const embeddedGraph = {};
+  for (const vertex of vertices) {
+    embeddedGraph[vertex] = [];
+  }
 
-console.log("Shortest Path:", shortestPath.path);
-console.log("Total Weight:", shortestPath.totalWeight);
-console.log("Minimum Spanning Tree:", MST);
-console.log("Minimum Cut:", minCut.minCut);
-console.log("Max Flow:", minCut.maxFlow);
+  const embeddedEdges = [];
+  const newVertex = "X";
+
+  for (const vertex of vertices) {
+    const neighbors = graph[vertex];
+
+    for (const neighbor of neighbors) {
+      const edge = [vertex, neighbor].sort().join("");
+
+      if (!embeddedEdges.includes(edge)) {
+        embeddedEdges.push(edge);
+        embeddedGraph[vertex].push(neighbor);
+        embeddedGraph[neighbor].push(vertex);
+      }
+    }
+  }
+
+  const edgeIntersections = {}; // Хранит информацию о пересечениях ребер
+
+  for (const vertex of vertices) {
+    const neighbors = embeddedGraph[vertex];
+
+    for (let i = 0; i < neighbors.length; i++) {
+      const neighbor1 = neighbors[i];
+
+      for (let j = i + 1; j < neighbors.length; j++) {
+        const neighbor2 = neighbors[j];
+
+        const edge1 = [vertex, neighbor1].sort().join("");
+        const edge2 = [vertex, neighbor2].sort().join("");
+
+        // Проверяем пересечение ребер
+        if (edgeIntersects(edge1, edge2)) {
+          return false;
+        }
+
+        // Обновляем информацию о пересечении ребер
+        if (!edgeIntersections[edge1]) {
+          edgeIntersections[edge1] = [];
+        }
+        if (!edgeIntersections[edge2]) {
+          edgeIntersections[edge2] = [];
+        }
+        edgeIntersections[edge1].push(edge2);
+        edgeIntersections[edge2].push(edge1);
+      }
+    }
+  }
+
+  return true;
+}
+
+// Вспомогательная функция для проверки пересечения ребер
+function doEdgesIntersect(edge1, edge2) {
+  const [x1, y1] = edge1[0];
+  const [x2, y2] = edge1[1];
+  const [x3, y3] = edge2[0];
+  const [x4, y4] = edge2[1];
+
+  const d1 = direction(x3, y3, x4, y4, x1, y1);
+  const d2 = direction(x3, y3, x4, y4, x2, y2);
+  const d3 = direction(x1, y1, x2, y2, x3, y3);
+  const d4 = direction(x1, y1, x2, y2, x4, y4);
+
+  if (
+    ((d1 > 0 && d2 < 0) || (d1 < 0 && d2 > 0)) &&
+    ((d3 > 0 && d4 < 0) || (d3 < 0 && d4 > 0))
+  ) {
+    return true;
+  } else if (d1 === 0 && onSegment(x3, y3, x4, y4, x1, y1)) {
+    return true;
+  } else if (d2 === 0 && onSegment(x3, y3, x4, y4, x2, y2)) {
+    return true;
+  } else if (d3 === 0 && onSegment(x1, y1, x2, y2, x3, y3)) {
+    return true;
+  } else if (d4 === 0 && onSegment(x1, y1, x2, y2, x4, y4)) {
+    return true;
+  }
+
+  return false;
+}
+
+// Вспомогательные функции для проверки пересечения ребер
+
+function direction(x1, y1, x2, y2, x3, y3) {
+  return (x3 - x1) * (y2 - y1) - (x2 - x1) * (y3 - y1);
+}
+
+function onSegment(x1, y1, x2, y2, x3, y3) {
+  return (
+    Math.min(x1, x2) <= x3 &&
+    x3 <= Math.max(x1, x2) &&
+    Math.min(y1, y2) <= y3 &&
+    y3 <= Math.max(y1, y2)
+  );
+}
