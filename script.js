@@ -1930,156 +1930,156 @@ ladder.up().up().up().up().up().up().up().down().showStep().down().showStep();
 //   return helper(nums, null, 1);
 // };
 
-class Graph {
-  constructor() {
-    this.vertices = {};
-  }
+// class Graph {
+//   constructor() {
+//     this.vertices = {};
+//   }
 
-  addVertex(vertex) {
-    this.vertices[vertex] = {};
-  }
+//   addVertex(vertex) {
+//     this.vertices[vertex] = {};
+//   }
 
-  addEdge(vertex1, vertex2, weight) {
-    this.vertices[vertex1][vertex2] = weight;
-    this.vertices[vertex2][vertex1] = weight;
-  }
+//   addEdge(vertex1, vertex2, weight) {
+//     this.vertices[vertex1][vertex2] = weight;
+//     this.vertices[vertex2][vertex1] = weight;
+//   }
 
-  dijkstra(startVertex, endVertex) {
-    const distances = {};
-    const visited = {};
-    const previous = {};
-    const queue = new PriorityQueue();
+//   dijkstra(startVertex, endVertex) {
+//     const distances = {};
+//     const visited = {};
+//     const previous = {};
+//     const queue = new PriorityQueue();
 
-    for (let vertex in this.vertices) {
-      if (vertex === startVertex) {
-        distances[vertex] = 0;
-        queue.enqueue(vertex, 0);
-      } else {
-        distances[vertex] = Infinity;
-        queue.enqueue(vertex, Infinity);
-      }
-      previous[vertex] = null;
-    }
+//     for (let vertex in this.vertices) {
+//       if (vertex === startVertex) {
+//         distances[vertex] = 0;
+//         queue.enqueue(vertex, 0);
+//       } else {
+//         distances[vertex] = Infinity;
+//         queue.enqueue(vertex, Infinity);
+//       }
+//       previous[vertex] = null;
+//     }
 
-    while (!queue.isEmpty()) {
-      const currentVertex = queue.dequeue().element;
-      if (currentVertex === endVertex) {
-        // Построение пути и вычисление суммы
-        const path = [];
-        let vertex = endVertex;
-        let totalWeight = 0; // Переменная для хранения суммы весов
-        while (vertex !== null) {
-          path.unshift(vertex);
-          const previousVertex = previous[vertex];
-          if (previousVertex !== null) {
-            totalWeight += this.vertices[vertex][previousVertex];
-          }
-          vertex = previousVertex;
-        }
-        return { path, totalWeight };
-      }
+//     while (!queue.isEmpty()) {
+//       const currentVertex = queue.dequeue().element;
+//       if (currentVertex === endVertex) {
+//         // Построение пути и вычисление суммы
+//         const path = [];
+//         let vertex = endVertex;
+//         let totalWeight = 0; // Переменная для хранения суммы весов
+//         while (vertex !== null) {
+//           path.unshift(vertex);
+//           const previousVertex = previous[vertex];
+//           if (previousVertex !== null) {
+//             totalWeight += this.vertices[vertex][previousVertex];
+//           }
+//           vertex = previousVertex;
+//         }
+//         return { path, totalWeight };
+//       }
 
-      if (!visited[currentVertex]) {
-        visited[currentVertex] = true;
-        const neighbors = this.vertices[currentVertex];
-        for (let neighbor in neighbors) {
-          const distance = distances[currentVertex] + neighbors[neighbor];
-          if (distance < distances[neighbor]) {
-            distances[neighbor] = distance;
-            previous[neighbor] = currentVertex;
-            queue.enqueue(neighbor, distance);
-          }
-        }
-      }
-    }
+//       if (!visited[currentVertex]) {
+//         visited[currentVertex] = true;
+//         const neighbors = this.vertices[currentVertex];
+//         for (let neighbor in neighbors) {
+//           const distance = distances[currentVertex] + neighbors[neighbor];
+//           if (distance < distances[neighbor]) {
+//             distances[neighbor] = distance;
+//             previous[neighbor] = currentVertex;
+//             queue.enqueue(neighbor, distance);
+//           }
+//         }
+//       }
+//     }
 
-    // Если путь не найден
-    return null;
-  }
+//     // Если путь не найден
+//     return null;
+//   }
 
-  // findMinCut(sourceVertex, sinkVertex) {
-  //   // Создаем копию графа
-  //   const residualGraph = JSON.parse(JSON.stringify(this.vertices));
+//   findMinCut(sourceVertex, sinkVertex) {
+//     // Создаем копию графа
+//     const residualGraph = JSON.parse(JSON.stringify(this.vertices));
 
-  //   let maxFlow = 0; // Максимальный поток
-  //   const parent = {}; // Хранит путь в виде дерева
-  //   let hasAugmentingPath = true;
+//     let maxFlow = 0; // Максимальный поток
+//     const parent = {}; // Хранит путь в виде дерева
+//     let hasAugmentingPath = true;
 
-  //   while (hasAugmentingPath) {
-  //     // Ищем путь в остаточном графе с помощью алгоритма поиска в ширину
-  //     hasAugmentingPath = false;
-  //     const queue = [sourceVertex];
-  //     parent[sourceVertex] = null;
+//     while (hasAugmentingPath) {
+//       // Ищем путь в остаточном графе с помощью алгоритма поиска в ширину
+//       hasAugmentingPath = false;
+//       const queue = [sourceVertex];
+//       parent[sourceVertex] = null;
 
-  //     while (queue.length > 0) {
-  //       const currentVertex = queue.shift();
+//       while (queue.length > 0) {
+//         const currentVertex = queue.shift();
 
-  //       for (let neighbor in residualGraph[currentVertex]) {
-  //         if (!parent[neighbor] && residualGraph[currentVertex][neighbor] > 0) {
-  //           parent[neighbor] = currentVertex;
-  //           queue.push(neighbor);
-  //         }
-  //       }
-  //     }
+//         for (let neighbor in residualGraph[currentVertex]) {
+//           if (!parent[neighbor] && residualGraph[currentVertex][neighbor] > 0) {
+//             parent[neighbor] = currentVertex;
+//             queue.push(neighbor);
+//           }
+//         }
+//       }
 
-  //     // Если найден путь до стока
-  //     if (parent[sinkVertex]) {
-  //       hasAugmentingPath = true;
+//   //     // Если найден путь до стока
+//       if (parent[sinkVertex]) {
+//         hasAugmentingPath = true;
 
-  //       let pathFlow = Infinity;
-  //       let v = sinkVertex;
+//         let pathFlow = Infinity;
+//         let v = sinkVertex;
 
-  //       // Находим минимальную пропускную способность на пути
-  //       while (v !== sourceVertex) {
-  //         const u = parent[v];
-  //         pathFlow = Math.min(pathFlow, residualGraph[u][v]);
-  //         v = u;
-  //       }
+//         // Находим минимальную пропускную способность на пути
+//         while (v !== sourceVertex) {
+//           const u = parent[v];
+//           pathFlow = Math.min(pathFlow, residualGraph[u][v]);
+//           v = u;
+//         }
 
-  //       // Обновляем остаточные пропускные способности графа
-  //       v = sinkVertex;
-  //       while (v !== sourceVertex) {
-  //         const u = parent[v];
-  //         residualGraph[u][v] -= pathFlow;
-  //         residualGraph[v][u] += pathFlow;
-  //         v = u;
-  //       }
+//         // Обновляем остаточные пропускные способности графа
+//         v = sinkVertex;
+//         while (v !== sourceVertex) {
+//           const u = parent[v];
+//           residualGraph[u][v] -= pathFlow;
+//           residualGraph[v][u] += pathFlow;
+//           v = u;
+//         }
 
-  //       maxFlow += pathFlow;
-  //     }
-  //   }
+//         maxFlow += pathFlow;
+//       }
+//     }
 
-  //   // После выполнения алгоритма Форда-Фалкерсона остаточные ребра графа образуют минимальный разрез
-  //   const minCut = [];
+//     // После выполнения алгоритма Форда-Фалкерсона остаточные ребра графа образуют минимальный разрез
+//     const minCut = [];
 
-  //   // Помечаем вершины, достижимые из источника
-  //   const visited = {};
-  //   const queue = [sourceVertex];
-  //   visited[sourceVertex] = true;
+//     // Помечаем вершины, достижимые из источника
+//     const visited = {};
+//     const queue = [sourceVertex];
+//     visited[sourceVertex] = true;
 
-  //   while (queue.length > 0) {
-  //     const currentVertex = queue.shift();
+//     while (queue.length > 0) {
+//       const currentVertex = queue.shift();
 
-  //     for (let neighbor in residualGraph[currentVertex]) {
-  //       if (!visited[neighbor] && residualGraph[currentVertex][neighbor] > 0) {
-  //         visited[neighbor] = true;
-  //         queue.push(neighbor);
-  //       }
-  //     }
-  //   }
+//       for (let neighbor in residualGraph[currentVertex]) {
+//         if (!visited[neighbor] && residualGraph[currentVertex][neighbor] > 0) {
+//           visited[neighbor] = true;
+//           queue.push(neighbor);
+//         }
+//       }
+//     }
 
-  //   // Все ребра, исходящие из посещенных вершин, являются частью минимального разреза
-  //   for (let vertex in this.vertices) {
-  //     for (let neighbor in this.vertices[vertex]) {
-  //       if (visited[vertex] && !visited[neighbor]) {
-  //         minCut.push({ vertex1: vertex, vertex2: neighbor });
-  //       }
-  //     }
-  //   }
+//     // Все ребра, исходящие из посещенных вершин, являются частью минимального разреза
+//     for (let vertex in this.vertices) {
+//       for (let neighbor in this.vertices[vertex]) {
+//         if (visited[vertex] && !visited[neighbor]) {
+//           minCut.push({ vertex1: vertex, vertex2: neighbor });
+//         }
+//       }
+//     }
 
-  //   return { minCut, maxFlow };
-  // }
-}
+//     return { minCut, maxFlow };
+//   }
+// }
 
 // class PriorityQueue {
 //   constructor() {
@@ -2173,26 +2173,26 @@ class Graph {
 // graph.addEdge("2", "3", 8);
 // graph.addEdge("1", "4", 15);
 // graph.addEdge("3", "4", 2);
-// graph.addEdge("3", "5", 2);
-// graph.addEdge("2", "5", 3);
-// graph.addEdge("4", "6", 3);
-// graph.addEdge("3", "6", 3);
-// graph.addEdge("5", "6", 3);
-// graph.addEdge("4", "7", 3);
-// graph.addEdge("8", "7", 3);
-// graph.addEdge("6", "8", 3);
-// graph.addEdge("8", "9", 3);
-// graph.addEdge("5", "9", 3);
-// graph.addEdge("7", "10", 3);
-// graph.addEdge("8", "10", 3);
-// graph.addEdge("9", "10", 3);
-// graph.addEdge("7", "11", 3);
-// graph.addEdge("10", "11", 3);
-// graph.addEdge("10", "12", 3);
-// graph.addEdge("9", "12", 3);
-// graph.addEdge("11", "13", 3);
-// graph.addEdge("10", "13", 3);
-// graph.addEdge("12", "13", 3);
+// graph.addEdge("3", "5", 14);
+// graph.addEdge("2", "5", 14);
+// graph.addEdge("4", "6", 16);
+// graph.addEdge("3", "6", 18);
+// graph.addEdge("5", "6", 17);
+// graph.addEdge("4", "7", 10);
+// graph.addEdge("6", "7", 10);
+// graph.addEdge("6", "8", 8);
+// graph.addEdge("9", "8", 3);
+// graph.addEdge("5", "9", 10);
+// graph.addEdge("7", "10", 22);
+// graph.addEdge("8", "10", 19);
+// graph.addEdge("9", "10", 5);
+// graph.addEdge("7", "11", 12);
+// graph.addEdge("10", "11", 9);
+// graph.addEdge("10", "12", 6);
+// graph.addEdge("9", "12", 15);
+// graph.addEdge("11", "13", 16);
+// graph.addEdge("10", "13", 12);
+// graph.addEdge("12", "13", 19);
 
 // const shortestPath = graph.dijkstra("0", "12");
 // const MST = graph.primMST();
@@ -2203,133 +2203,133 @@ class Graph {
 
 /////////////////////////////////////////////////////////////
 
-const graph = {
-  A: ["B", "C", "D"],
-  B: ["A", "C"],
-  C: ["A", "B", "D"],
-  D: ["A", "C"],
-};
+// const graph = {
+//   A: ["B", "C", "D"],
+//   B: ["A", "C"],
+//   C: ["A", "B", "D"],
+//   D: ["A", "C"],
+// };
 
-function isGraphPlanar(graph) {
-  const vertices = Object.keys(graph);
+// function isGraphPlanar(graph) {
+//   const vertices = Object.keys(graph);
 
-  // Шаги 2 и 3: проверка числа вершин и степеней вершин
-  if (vertices.length <= 4) {
-    return true;
-  }
+//   // Шаги 2 и 3: проверка числа вершин и степеней вершин
+//   if (vertices.length <= 4) {
+//     return true;
+//   }
 
-  const degrees = {};
-  for (const vertex of vertices) {
-    degrees[vertex] = graph[vertex].length;
-    if (degrees[vertex] >= 3) {
-      return false;
-    }
-  }
+//   const degrees = {};
+//   for (const vertex of vertices) {
+//     degrees[vertex] = graph[vertex].length;
+//     if (degrees[vertex] >= 3) {
+//       return false;
+//     }
+//   }
 
-  // Шаг 4: алгоритм вложения
-  const embeddedGraph = {};
-  for (const vertex of vertices) {
-    embeddedGraph[vertex] = [];
-  }
+//   // Шаг 4: алгоритм вложения
+//   const embeddedGraph = {};
+//   for (const vertex of vertices) {
+//     embeddedGraph[vertex] = [];
+//   }
 
-  const embeddedEdges = [];
-  const newVertex = "X";
+//   const embeddedEdges = [];
+//   const newVertex = "X";
 
-  for (const vertex of vertices) {
-    const neighbors = graph[vertex];
+//   for (const vertex of vertices) {
+//     const neighbors = graph[vertex];
 
-    for (const neighbor of neighbors) {
-      const edge = [vertex, neighbor].sort().join("");
+//     for (const neighbor of neighbors) {
+//       const edge = [vertex, neighbor].sort().join("");
 
-      if (!embeddedEdges.includes(edge)) {
-        embeddedEdges.push(edge);
-        embeddedGraph[vertex].push(neighbor);
-        embeddedGraph[neighbor].push(vertex);
-      }
-    }
-  }
+//       if (!embeddedEdges.includes(edge)) {
+//         embeddedEdges.push(edge);
+//         embeddedGraph[vertex].push(neighbor);
+//         embeddedGraph[neighbor].push(vertex);
+//       }
+//     }
+//   }
 
-  const edgeIntersections = {}; // Хранит информацию о пересечениях ребер
+//   const edgeIntersections = {}; // Хранит информацию о пересечениях ребер
 
-  for (const vertex of vertices) {
-    const neighbors = embeddedGraph[vertex];
+//   for (const vertex of vertices) {
+//     const neighbors = embeddedGraph[vertex];
 
-    for (let i = 0; i < neighbors.length; i++) {
-      const neighbor1 = neighbors[i];
+//     for (let i = 0; i < neighbors.length; i++) {
+//       const neighbor1 = neighbors[i];
 
-      for (let j = i + 1; j < neighbors.length; j++) {
-        const neighbor2 = neighbors[j];
+//       for (let j = i + 1; j < neighbors.length; j++) {
+//         const neighbor2 = neighbors[j];
 
-        const edge1 = [vertex, neighbor1].sort().join("");
-        const edge2 = [vertex, neighbor2].sort().join("");
+//         const edge1 = [vertex, neighbor1].sort().join("");
+//         const edge2 = [vertex, neighbor2].sort().join("");
 
-        // Проверяем пересечение ребер
-        if (edgeIntersects(edge1, edge2)) {
-          return false;
-        }
+//         // Проверяем пересечение ребер
+//         if (edgeIntersects(edge1, edge2)) {
+//           return false;
+//         }
 
-        // Обновляем информацию о пересечении ребер
-        if (!edgeIntersections[edge1]) {
-          edgeIntersections[edge1] = [];
-        }
-        if (!edgeIntersections[edge2]) {
-          edgeIntersections[edge2] = [];
-        }
-        edgeIntersections[edge1].push(edge2);
-        edgeIntersections[edge2].push(edge1);
-      }
-    }
-  }
+//         // Обновляем информацию о пересечении ребер
+//         if (!edgeIntersections[edge1]) {
+//           edgeIntersections[edge1] = [];
+//         }
+//         if (!edgeIntersections[edge2]) {
+//           edgeIntersections[edge2] = [];
+//         }
+//         edgeIntersections[edge1].push(edge2);
+//         edgeIntersections[edge2].push(edge1);
+//       }
+//     }
+//   }
 
-  return true;
-}
+//   return true;
+// }
 
-// Вспомогательная функция для проверки пересечения ребер
-function doEdgesIntersect(edge1, edge2) {
-  const [x1, y1] = edge1[0];
-  const [x2, y2] = edge1[1];
-  const [x3, y3] = edge2[0];
-  const [x4, y4] = edge2[1];
+// // Вспомогательная функция для проверки пересечения ребер
+// function doEdgesIntersect(edge1, edge2) {
+//   const [x1, y1] = edge1[0];
+//   const [x2, y2] = edge1[1];
+//   const [x3, y3] = edge2[0];
+//   const [x4, y4] = edge2[1];
 
-  const d1 = direction(x3, y3, x4, y4, x1, y1);
-  const d2 = direction(x3, y3, x4, y4, x2, y2);
-  const d3 = direction(x1, y1, x2, y2, x3, y3);
-  const d4 = direction(x1, y1, x2, y2, x4, y4);
+//   const d1 = direction(x3, y3, x4, y4, x1, y1);
+//   const d2 = direction(x3, y3, x4, y4, x2, y2);
+//   const d3 = direction(x1, y1, x2, y2, x3, y3);
+//   const d4 = direction(x1, y1, x2, y2, x4, y4);
 
-  if (
-    ((d1 > 0 && d2 < 0) || (d1 < 0 && d2 > 0)) &&
-    ((d3 > 0 && d4 < 0) || (d3 < 0 && d4 > 0))
-  ) {
-    return true;
-  } else if (d1 === 0 && onSegment(x3, y3, x4, y4, x1, y1)) {
-    return true;
-  } else if (d2 === 0 && onSegment(x3, y3, x4, y4, x2, y2)) {
-    return true;
-  } else if (d3 === 0 && onSegment(x1, y1, x2, y2, x3, y3)) {
-    return true;
-  } else if (d4 === 0 && onSegment(x1, y1, x2, y2, x4, y4)) {
-    return true;
-  }
+//   if (
+//     ((d1 > 0 && d2 < 0) || (d1 < 0 && d2 > 0)) &&
+//     ((d3 > 0 && d4 < 0) || (d3 < 0 && d4 > 0))
+//   ) {
+//     return true;
+//   } else if (d1 === 0 && onSegment(x3, y3, x4, y4, x1, y1)) {
+//     return true;
+//   } else if (d2 === 0 && onSegment(x3, y3, x4, y4, x2, y2)) {
+//     return true;
+//   } else if (d3 === 0 && onSegment(x1, y1, x2, y2, x3, y3)) {
+//     return true;
+//   } else if (d4 === 0 && onSegment(x1, y1, x2, y2, x4, y4)) {
+//     return true;
+//   }
 
-  return false;
-}
+//   return false;
+// }
 
-// Вспомогательные функции для проверки пересечения ребер
+// // Вспомогательные функции для проверки пересечения ребер
 
-function direction(x1, y1, x2, y2, x3, y3) {
-  return (x3 - x1) * (y2 - y1) - (x2 - x1) * (y3 - y1);
-}
+// function direction(x1, y1, x2, y2, x3, y3) {
+//   return (x3 - x1) * (y2 - y1) - (x2 - x1) * (y3 - y1);
+// }
 
-function onSegment(x1, y1, x2, y2, x3, y3) {
-  return (
-    Math.min(x1, x2) <= x3 &&
-    x3 <= Math.max(x1, x2) &&
-    Math.min(y1, y2) <= y3 &&
-    y3 <= Math.max(y1, y2)
-  );
-}
+// function onSegment(x1, y1, x2, y2, x3, y3) {
+//   return (
+//     Math.min(x1, x2) <= x3 &&
+//     x3 <= Math.max(x1, x2) &&
+//     Math.min(y1, y2) <= y3 &&
+//     y3 <= Math.max(y1, y2)
+//   );
+// }
 
-console.log(isGraphPlanar());
+// console.log(isGraphPlanar());
 
 // var swapPairs = function(head) {
 //   if (head == null || head.next == null) {
@@ -2379,3 +2379,44 @@ console.log(isGraphPlanar());
 
 //   return maximumSum;
 // }
+
+let solve = (src, graph, vis) => {
+  let q = new Queue();
+  q.enqueue(src);
+  vis[src] = 0;
+
+  while (!q.isEmpty()) {
+    let node = q.front();
+    q.pop();
+
+    for (let i = 0; i < graph[node].length; i++) {
+      let en = graph[node][i];
+
+      if (vis[en] != -1 && vis[en] == vis[node]) return false;
+      else if (vis[en] == -1) {
+        // vis[en] = !vis[node];
+        vis[en] = vis[node] == 0 ? 1 : 0;
+        q.push(en);
+      }
+    }
+  }
+
+  return true;
+};
+
+var isBipartite = function (graph) {
+  let n = graph.length;
+  let vis = new Array(n);
+  vis.fill(-1);
+
+  for (let i = 0; i < n; i++) {
+    if (vis[i] == -1) {
+      let rs = solve(i, graph, vis);
+      if (rs == false) {
+        return false;
+      }
+    }
+  }
+
+  return true;
+};
