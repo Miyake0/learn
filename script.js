@@ -2380,43 +2380,121 @@ ladder.up().up().up().up().up().up().up().down().showStep().down().showStep();
 //   return maximumSum;
 // }
 
-let solve = (src, graph, vis) => {
-  let q = new Queue();
-  q.enqueue(src);
-  vis[src] = 0;
+// let solve = (src, graph, vis) => {
+//   let q = new Queue();
+//   q.enqueue(src);
+//   vis[src] = 0;
 
-  while (!q.isEmpty()) {
-    let node = q.front();
-    q.pop();
+//   while (!q.isEmpty()) {
+//     let node = q.front();
+//     q.pop();
 
-    for (let i = 0; i < graph[node].length; i++) {
-      let en = graph[node][i];
+//     for (let i = 0; i < graph[node].length; i++) {
+//       let en = graph[node][i];
 
-      if (vis[en] != -1 && vis[en] == vis[node]) return false;
-      else if (vis[en] == -1) {
-        // vis[en] = !vis[node];
-        vis[en] = vis[node] == 0 ? 1 : 0;
-        q.push(en);
-      }
+//       if (vis[en] != -1 && vis[en] == vis[node]) return false;
+//       else if (vis[en] == -1) {
+//         // vis[en] = !vis[node];
+//         vis[en] = vis[node] == 0 ? 1 : 0;
+//         q.push(en);
+//       }
+//     }
+//   }
+
+//   return true;
+// };
+
+// var isBipartite = function (graph) {
+//   let n = graph.length;
+//   let vis = new Array(n);
+//   vis.fill(-1);
+
+//   for (let i = 0; i < n; i++) {
+//     if (vis[i] == -1) {
+//       let rs = solve(i, graph, vis);
+//       if (rs == false) {
+//         return false;
+//       }
+//     }
+//   }
+
+//   return true;
+// };
+
+var calcEquation = function (equations, values, queries) {
+  // Step 1: Build the graph
+  const graph = buildGraph(equations, values);
+
+  // Step 2: Evaluate queries
+  const results = [];
+  for (const [start, end] of queries) {
+    if (!(start in graph) || !(end in graph)) {
+      // One or both variables are not in the graph
+      results.push(-1.0);
+    } else {
+      const visited = new Set();
+      const result = evaluateQuery(graph, start, end, visited);
+      results.push(result);
     }
   }
 
-  return true;
+  return results;
 };
 
-var isBipartite = function (graph) {
-  let n = graph.length;
-  let vis = new Array(n);
-  vis.fill(-1);
+/**
+ * Helper function to build the graph from equations and values.
+ * @param {string[][]} equations - Array of variable pairs equations.
+ * @param {number[]} values - Array of real numbers representing the equation values.
+ * @return {object} - The built graph.
+ */
+function buildGraph(equations, values) {
+  const graph = {};
 
-  for (let i = 0; i < n; i++) {
-    if (vis[i] == -1) {
-      let rs = solve(i, graph, vis);
-      if (rs == false) {
-        return false;
-      }
+  for (let i = 0; i < equations.length; i++) {
+    const [numerator, denominator] = equations[i];
+    const value = values[i];
+
+    if (!(numerator in graph)) {
+      graph[numerator] = [];
+    }
+    if (!(denominator in graph)) {
+      graph[denominator] = [];
+    }
+
+    graph[numerator].push([denominator, value]);
+    graph[denominator].push([numerator, 1 / value]);
+  }
+
+  return graph;
+}
+
+/**
+ * Helper function to evaluate a query using DFS.
+ * @param {object} graph - The graph representing the equations and values.
+ * @param {string} start - The starting variable.
+ * @param {string} end - The target variable.
+ * @param {Set} visited - Set to track visited variables during DFS.
+ * @return {number} - The result of evaluating the query.
+ */
+function evaluateQuery(graph, start, end, visited) {
+  if (start === end) {
+    return 1.0;
+  }
+
+  visited.add(start);
+
+  for (const [next, value] of graph[start]) {
+    if (visited.has(next)) {
+      continue;
+    }
+
+    visited.add(next);
+    const result = evaluateQuery(graph, next, end, visited);
+
+    if (result !== -1.0) {
+      return result * value;
     }
   }
 
-  return true;
-};
+  return -1.0;
+}
