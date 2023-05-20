@@ -2421,80 +2421,80 @@ ladder.up().up().up().up().up().up().up().down().showStep().down().showStep();
 //   return true;
 // };
 
-var calcEquation = function (equations, values, queries) {
-  // Step 1: Build the graph
-  const graph = buildGraph(equations, values);
+// var calcEquation = function (equations, values, queries) {
+//   // Step 1: Build the graph
+//   const graph = buildGraph(equations, values);
 
-  // Step 2: Evaluate queries
-  const results = [];
-  for (const [start, end] of queries) {
-    if (!(start in graph) || !(end in graph)) {
-      // One or both variables are not in the graph
-      results.push(-1.0);
-    } else {
-      const visited = new Set();
-      const result = evaluateQuery(graph, start, end, visited);
-      results.push(result);
-    }
-  }
+//   // Step 2: Evaluate queries
+//   const results = [];
+//   for (const [start, end] of queries) {
+//     if (!(start in graph) || !(end in graph)) {
+//       // One or both variables are not in the graph
+//       results.push(-1.0);
+//     } else {
+//       const visited = new Set();
+//       const result = evaluateQuery(graph, start, end, visited);
+//       results.push(result);
+//     }
+//   }
 
-  return results;
-};
+//   return results;
+// };
 
-/**
- * Helper function to build the graph from equations and values.
- * @param {string[][]} equations - Array of variable pairs equations.
- * @param {number[]} values - Array of real numbers representing the equation values.
- * @return {object} - The built graph.
- */
-function buildGraph(equations, values) {
-  const graph = {};
+// /**
+//  * Helper function to build the graph from equations and values.
+//  * @param {string[][]} equations - Array of variable pairs equations.
+//  * @param {number[]} values - Array of real numbers representing the equation values.
+//  * @return {object} - The built graph.
+//  */
+// function buildGraph(equations, values) {
+//   const graph = {};
 
-  for (let i = 0; i < equations.length; i++) {
-    const [numerator, denominator] = equations[i];
-    const value = values[i];
+//   for (let i = 0; i < equations.length; i++) {
+//     const [numerator, denominator] = equations[i];
+//     const value = values[i];
 
-    if (!(numerator in graph)) {
-      graph[numerator] = [];
-    }
-    if (!(denominator in graph)) {
-      graph[denominator] = [];
-    }
+//     if (!(numerator in graph)) {
+//       graph[numerator] = [];
+//     }
+//     if (!(denominator in graph)) {
+//       graph[denominator] = [];
+//     }
 
-    graph[numerator].push([denominator, value]);
-    graph[denominator].push([numerator, 1 / value]);
-  }
+//     graph[numerator].push([denominator, value]);
+//     graph[denominator].push([numerator, 1 / value]);
+//   }
 
-  return graph;
-}
+//   return graph;
+// }
 
-/**
- * Helper function to evaluate a query using DFS.
- * @param {object} graph - The graph representing the equations and values.
- * @param {string} start - The starting variable.
- * @param {string} end - The target variable.
- * @param {Set} visited - Set to track visited variables during DFS.
- * @return {number} - The result of evaluating the query.
- */
-function evaluateQuery(graph, start, end, visited) {
-  if (start === end) {
-    return 1.0;
-  }
+// /**
+//  * Helper function to evaluate a query using DFS.
+//  * @param {object} graph - The graph representing the equations and values.
+//  * @param {string} start - The starting variable.
+//  * @param {string} end - The target variable.
+//  * @param {Set} visited - Set to track visited variables during DFS.
+//  * @return {number} - The result of evaluating the query.
+//  */
+// function evaluateQuery(graph, start, end, visited) {
+//   if (start === end) {
+//     return 1.0;
+//   }
 
-  visited.add(start);
+//   visited.add(start);
 
-  for (const [next, value] of graph[start]) {
-    if (visited.has(next)) {
-      continue;
-    }
+//   for (const [next, value] of graph[start]) {
+//     if (visited.has(next)) {
+//       continue;
+//     }
 
-    visited.add(next);
-    const result = evaluateQuery(graph, next, end, visited);
+//     visited.add(next);
+//     const result = evaluateQuery(graph, next, end, visited);
 
-    if (result !== -1.0) {
-      return result * value;
-    }
-  }
+//     if (result !== -1.0) {
+//       return result * value;
+//     }
+//   }
 
-  return -1.0;
-}
+//   return -1.0;
+// }
