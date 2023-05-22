@@ -2499,61 +2499,81 @@ ladder.up().up().up().up().up().up().up().down().showStep().down().showStep();
 //   return -1.0;
 // }
 
-var shortestBridge = function (grid) {
-  const N = grid.length;
-  let visit = new Set();
-  let deque = [];
-  const direction = [
-    [0, 1],
-    [1, 0],
-    [0, -1],
-    [-1, 0],
-  ];
-  function invalid(row, col) {
-    return row < 0 || col < 0 || row === N || col === N;
+// var shortestBridge = function (grid) {
+//   const N = grid.length;
+//   let visit = new Set();
+//   let deque = [];
+//   const direction = [
+//     [0, 1],
+//     [1, 0],
+//     [0, -1],
+//     [-1, 0],
+//   ];
+//   function invalid(row, col) {
+//     return row < 0 || col < 0 || row === N || col === N;
+//   }
+//   function dfs(row, col) {
+//     if (
+//       invalid(row, col) ||
+//       visit.has(`${row},${col}`) ||
+//       grid[row][col] == 0
+//     ) {
+//       return;
+//     }
+//     visit.add(`${row},${col}`);
+//     deque.push([row, col]);
+//     for (let dx of direction) {
+//       dfs(row + dx[0], col + dx[1]);
+//     }
+//   }
+//   function bfs() {
+//     let res = 0;
+//     while (deque.length != 0) {
+//       let n = deque.length;
+//       for (let i = 0; i < n; i++) {
+//         let [r, c] = deque.shift();
+//         for (let [dr, dc] of direction) {
+//           currRow = r + dr;
+//           currCol = c + dc;
+//           if (invalid(currRow, currCol) || visit.has(`${currRow},${currCol}`)) {
+//             continue;
+//           }
+//           if (grid[currRow][currCol]) {
+//             return res;
+//           }
+//           deque.push([currRow, currCol]);
+//           visit.add(`${currRow},${currCol}`);
+//         }
+//       }
+//       res += 1;
+//     }
+//   }
+//   for (let i = 0; i < N; i++) {
+//     for (let j = 0; j < N; j++) {
+//       if (grid[i][j] === 1) {
+//         dfs(i, j);
+//         return bfs();
+//       }
+//     }
+//   }
+// };
+
+var topKFrequent = function (nums, k) {
+  const freqMap = new Map();
+  const bucket = [];
+  const result = [];
+
+  for (let num of nums) {
+    freqMap.set(num, (freqMap.get(num) || 0) + 1);
   }
-  function dfs(row, col) {
-    if (
-      invalid(row, col) ||
-      visit.has(`${row},${col}`) ||
-      grid[row][col] == 0
-    ) {
-      return;
-    }
-    visit.add(`${row},${col}`);
-    deque.push([row, col]);
-    for (let dx of direction) {
-      dfs(row + dx[0], col + dx[1]);
-    }
+
+  for (let [num, freq] of freqMap) {
+    bucket[freq] = (bucket[freq] || new Set()).add(num);
   }
-  function bfs() {
-    let res = 0;
-    while (deque.length != 0) {
-      let n = deque.length;
-      for (let i = 0; i < n; i++) {
-        let [r, c] = deque.shift();
-        for (let [dr, dc] of direction) {
-          currRow = r + dr;
-          currCol = c + dc;
-          if (invalid(currRow, currCol) || visit.has(`${currRow},${currCol}`)) {
-            continue;
-          }
-          if (grid[currRow][currCol]) {
-            return res;
-          }
-          deque.push([currRow, currCol]);
-          visit.add(`${currRow},${currCol}`);
-        }
-      }
-      res += 1;
-    }
+
+  for (let i = bucket.length - 1; i >= 0; i--) {
+    if (bucket[i]) result.push(...bucket[i]);
+    if (result.length === k) break;
   }
-  for (let i = 0; i < N; i++) {
-    for (let j = 0; j < N; j++) {
-      if (grid[i][j] === 1) {
-        dfs(i, j);
-        return bfs();
-      }
-    }
-  }
+  return result;
 };
