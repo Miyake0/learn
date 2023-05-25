@@ -2558,22 +2558,37 @@ ladder.up().up().up().up().up().up().up().down().showStep().down().showStep();
 //   }
 // };
 
-var topKFrequent = function (nums, k) {
-  const freqMap = new Map();
-  const bucket = [];
-  const result = [];
+// var topKFrequent = function (nums, k) {
+//   const freqMap = new Map();
+//   const bucket = [];
+//   const result = [];
 
-  for (let num of nums) {
-    freqMap.set(num, (freqMap.get(num) || 0) + 1);
-  }
+//   for (let num of nums) {
+//     freqMap.set(num, (freqMap.get(num) || 0) + 1);
+//   }
 
-  for (let [num, freq] of freqMap) {
-    bucket[freq] = (bucket[freq] || new Set()).add(num);
-  }
+//   for (let [num, freq] of freqMap) {
+//     bucket[freq] = (bucket[freq] || new Set()).add(num);
+//   }
 
-  for (let i = bucket.length - 1; i >= 0; i--) {
-    if (bucket[i]) result.push(...bucket[i]);
-    if (result.length === k) break;
+//   for (let i = bucket.length - 1; i >= 0; i--) {
+//     if (bucket[i]) result.push(...bucket[i]);
+//     if (result.length === k) break;
+//   }
+//   return result;
+// };
+
+var new21Game = function (n, k, maxPts) {
+  if (k == 0 || n >= k + maxPts) return 1.0;
+  let sum = 1.0;
+  let result = 0.0;
+  let dp = new Array(n + 1);
+  dp[0] = 1.0;
+  for (let i = 1; i <= n; i++) {
+    dp[i] = sum / maxPts;
+    if (i < k) sum += dp[i];
+    else result += dp[i];
+    if (i - maxPts >= 0) sum -= dp[i - maxPts];
   }
   return result;
 };
