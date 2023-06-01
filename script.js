@@ -2689,44 +2689,81 @@ ladder.up().up().up().up().up().up().up().down().showStep().down().showStep();
  * var param_3 = obj.contains(key)
  */
 
-var UndergroundSystem = function () {
-  this.avg = new Map();
-  this.train = new Map();
-};
+// var UndergroundSystem = function () {
+//   this.avg = new Map();
+//   this.train = new Map();
+// };
 
-/**
- * @param {number} id
- * @param {string} stationName
- * @param {number} t
- * @return {void}
- */
-UndergroundSystem.prototype.checkIn = function (id, start, t) {
-  this.train.set(id, [start, t]);
-};
+// /**
+//  * @param {number} id
+//  * @param {string} stationName
+//  * @param {number} t
+//  * @return {void}
+//  */
+// UndergroundSystem.prototype.checkIn = function (id, start, t) {
+//   this.train.set(id, [start, t]);
+// };
 
-/**
- * @param {number} id
- * @param {string} stationName
- * @param {number} t
- * @return {void}
- */
-UndergroundSystem.prototype.checkOut = function (id, end, t) {
-  const [start, s] = this.train.get(id);
-  const key = [start, end].join();
-  if (this.avg.has(key)) {
-    let [avg, cnt] = this.avg.get(key);
-    this.avg.set(key, [avg * (cnt / ++cnt) + (t - s) / cnt, cnt]);
-  } else {
-    this.avg.set(key, [t - s, 1]);
-  }
-  this.train.delete(id);
-};
+// /**
+//  * @param {number} id
+//  * @param {string} stationName
+//  * @param {number} t
+//  * @return {void}
+//  */
+// UndergroundSystem.prototype.checkOut = function (id, end, t) {
+//   const [start, s] = this.train.get(id);
+//   const key = [start, end].join();
+//   if (this.avg.has(key)) {
+//     let [avg, cnt] = this.avg.get(key);
+//     this.avg.set(key, [avg * (cnt / ++cnt) + (t - s) / cnt, cnt]);
+//   } else {
+//     this.avg.set(key, [t - s, 1]);
+//   }
+//   this.train.delete(id);
+// };
 
-/**
- * @param {string} startStation
- * @param {string} endStation
- * @return {number}
- */
-UndergroundSystem.prototype.getAverageTime = function (start, end) {
-  return this.avg.get([start, end].join())[0];
+// /**
+//  * @param {string} startStation
+//  * @param {string} endStation
+//  * @return {number}
+//  */
+// UndergroundSystem.prototype.getAverageTime = function (start, end) {
+//   return this.avg.get([start, end].join())[0];
+// };
+
+var shortestPathBinaryMatrix = function (grid) {
+  const m = grid.length;
+  const isValid = (i, j) =>
+    i >= 0 && j >= 0 && i < m && j < m && grid[i][j] == 0;
+  const time = new Array(m).fill(null).map(() => new Array(m).fill(-1));
+
+  const bfs = () => {
+    if (grid[0][0] == 1) {
+      return;
+    }
+    const Q = [[0, 0]];
+    time[0][0] = 1;
+    while (Q.length) {
+      let [x, y] = Q.shift();
+      let t = time[x][y];
+
+      if (x == m - 1 && y == m - 1) return t;
+
+      for (let i = -1; i <= 1; i++) {
+        for (let j = -1; j <= 1; j++) {
+          if (i == 0 && j == 0) continue;
+          const X = x + i,
+            Y = y + j;
+          if (isValid(X, Y)) {
+            grid[X][Y] = 1;
+            Q.push([X, Y]);
+            time[X][Y] = t + 1;
+          }
+        }
+      }
+    }
+  };
+
+  bfs();
+  return time[m - 1][m - 1];
 };
