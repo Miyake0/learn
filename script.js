@@ -2768,16 +2768,16 @@ ladder.up().up().up().up().up().up().up().down().showStep().down().showStep();
 //   return time[m - 1][m - 1];
 // };
 
-var numOfMinutes = function (n, headID, manager, informTime) {
-  manager.forEach((_, index) => timeFromEmployeeToHead(index));
+// var numOfMinutes = function (n, headID, manager, informTime) {
+//   manager.forEach((_, index) => timeFromEmployeeToHead(index));
 
-  return Math.max(...informTime);
+//   return Math.max(...informTime);
 
-  function timeFromEmployeeToHead(id) {
-    if (manager[id] !== -1) {
-      informTime[id] += timeFromEmployeeToHead(manager[id]);
-      manager[id] = -1;
-    }
-    return informTime[id];
-  }
-};
+//   function timeFromEmployeeToHead(id) {
+//     if (manager[id] !== -1) {
+//       informTime[id] += timeFromEmployeeToHead(manager[id]);
+//       manager[id] = -1;
+//     }
+//     return informTime[id];
+//   }
+// };
