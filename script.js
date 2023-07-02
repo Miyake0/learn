@@ -2782,24 +2782,46 @@ ladder.up().up().up().up().up().up().up().down().showStep().down().showStep();
 //   }
 // };
 
-var checkStraightLine = function (coordinates) {
-  coordLen = coordinates.length;
+// var checkStraightLine = function (coordinates) {
+//   coordLen = coordinates.length;
 
-  if (coordLen <= 2) return true;
+//   if (coordLen <= 2) return true;
 
-  function calculateSlope(x1, y1, x2, y2, x, y) {
-    return (y2 - y1) * (x - x1) - (y - y1) * (x2 - x1);
-  }
+//   function calculateSlope(x1, y1, x2, y2, x, y) {
+//     return (y2 - y1) * (x - x1) - (y - y1) * (x2 - x1);
+//   }
 
-  let [x1, y1] = coordinates[0];
-  let [x2, y2] = coordinates[1];
+//   let [x1, y1] = coordinates[0];
+//   let [x2, y2] = coordinates[1];
 
-  for (let i = 2; i < coordinates.length; i++) {
-    let [x, y] = coordinates[i];
-    if (calculateSlope(x1, y1, x2, y2, x, y) !== 0) {
-      return false;
-    }
-  }
+//   for (let i = 2; i < coordinates.length; i++) {
+//     let [x, y] = coordinates[i];
+//     if (calculateSlope(x1, y1, x2, y2, x, y) !== 0) {
+//       return false;
+//     }
+//   }
 
-  return true;
-};
+//   return true;
+// };
+
+// let elements = document.querySelectorAll("ul > li:last-child");
+
+// for (let elem of elements) {
+//   elem.style.background = "red"; // "тест", "пройден"
+// }
+
+//By Steve's Makerspace
+//Video: https://youtu.be/oKwi8h_yTsY
+
+// document.addEventListener(
+//   "click",
+//   (listener = () => {
+//     let count;
+//     return count++;
+//   })
+// );
+
+// "use strict";
+
+// let a = null + undefined;
+// console.log(a);
